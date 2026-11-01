@@ -1,434 +1,1317 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mastery English - 1,000 Palabras Intermedias</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --success: #10b981;
-      --danger: #ef4444;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --radius: 12px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende Inglés - Nivel Intermedio (1000 palabras)</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --success: #10B981;
+            --danger: #EF4444;
+            --bg: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --locked: #9CA3AF;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 15px; line-height: 1.5; }
-    .container { max-width: 950px; margin: 0 auto; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
-    header { text-align: center; margin-bottom: 20px; padding: 15px 0; }
-    header h1 { font-size: 1.8rem; color: #1e1b4b; font-weight: 800; }
-    header p { color: var(--text-muted); font-size: 0.95rem; margin-top: 4px; }
+        body { background-color: var(--bg); color: var(--text); padding: 20px; display: flex; justify-content: center; }
 
-    /* Groups Selector */
-    .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
-    .group-pill {
-      background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius);
-      padding: 10px; text-align: center; cursor: pointer; transition: 0.2s;
-    }
-    .group-pill.active { border-color: var(--primary); background: #eef2ff; }
-    .group-pill.locked { opacity: 0.5; cursor: not-allowed; background: #f1f5f9; }
-    .group-pill .badge { font-size: 0.75rem; font-weight: 700; color: var(--primary); }
-    .group-pill.locked .badge { color: var(--text-muted); }
-    .group-pill .status { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
+        .container { max-width: 1000px; width: 100%; }
 
-    .main-panel { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 { color: var(--primary); font-size: 2.5rem; margin-bottom: 10px; }
+        header p { color: var(--text-light); }
 
-    .nav-tabs { display: flex; gap: 8px; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
-    .tab-btn {
-      padding: 10px 14px; border: none; background: transparent; font-weight: 700; font-size: 0.9rem;
-      color: var(--text-muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px;
-    }
-    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+        /* Dashboard */
+        .grid-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        
+        .group-card {
+            background: var(--card-bg); border-radius: 12px; padding: 20px; text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;
+            position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .group-card.unlocked:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        .group-card.locked { background: #E5E7EB; color: var(--locked); }
+        
+        .group-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .group-card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px; }
+        
+        .btn {
+            background: var(--primary); color: white; border: none; padding: 10px 20px;
+            border-radius: 8px; cursor: pointer; font-weight: bold; transition: background 0.2s; width: 100%;
+            margin-bottom: 8px;
+        }
+        .btn:hover { background: var(--primary-hover); }
+        .btn:disabled { background: var(--locked); cursor: not-allowed; }
+        
+        .badge {
+            position: absolute; top: 10px; right: 10px; background: var(--success);
+            color: white; font-size: 0.7rem; padding: 3px 8px; border-radius: 12px; font-weight: bold;
+        }
 
-    /* Search Bar in Learn */
-    .search-box {
-      width: 100%; padding: 12px 15px; border: 1.5px solid var(--border); border-radius: 8px;
-      font-size: 0.95rem; margin-bottom: 20px; outline: none;
-    }
-    .search-box:focus { border-color: var(--primary); }
+        /* Views */
+        .view { display: none; }
+        .view.active { display: block; }
 
-    /* Words Grid */
-    .words-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-    .word-card {
-      border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: white;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .word-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .word-english { font-size: 1.15rem; font-weight: 800; color: var(--primary); }
-    .audio-btn { background: #e0e7ff; color: var(--primary); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 0.95rem; }
-    .audio-btn:hover { background: #c7d2fe; }
-    .word-spanish { font-size: 0.95rem; font-weight: 600; color: #334155; margin-bottom: 6px; }
-    .word-example { font-size: 0.85rem; color: #64748b; font-style: italic; background: #f8fafc; padding: 6px 8px; border-radius: 6px; }
+        /* Study Mode */
+        .flashcard {
+            background: var(--card-bg); border-radius: 16px; padding: 40px; text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; min-height: 250px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .flashcard h2 { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        .flashcard .translation { font-size: 2rem; color: var(--success); font-weight: bold; opacity: 0; transition: opacity 0.3s; }
+        .flashcard .translation.show { opacity: 1; }
+        
+        .controls { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+        .btn-secondary { background: #E5E7EB; color: var(--text); }
+        .btn-secondary:hover { background: #D1D5DB; }
 
-    /* Quiz */
-    .quiz-card { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
-    .quiz-card:last-child { border-bottom: none; }
-    .quiz-q { font-weight: 700; margin-bottom: 10px; font-size: 0.95rem; }
-    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .option-btn {
-      padding: 10px; border: 1.5px solid var(--border); border-radius: 8px; background: white;
-      text-align: left; cursor: pointer; font-size: 0.9rem; font-weight: 500;
-    }
-    .option-btn:hover { border-color: var(--primary); background: #faf5ff; }
-    .option-btn.selected { border-color: var(--primary); background: #eef2ff; color: var(--primary); font-weight: 700; }
-    
-    .primary-btn {
-      background: var(--primary); color: white; border: none; padding: 14px; border-radius: 10px;
-      font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; margin-top: 15px;
-    }
-    .primary-btn:hover { background: var(--primary-hover); }
+        /* Exam Mode */
+        .quiz-container { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .progress-bar { width: 100%; height: 10px; background: #E5E7EB; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
+        
+        .question { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
+        .option-btn {
+            padding: 15px; border: 2px solid #E5E7EB; border-radius: 8px; background: white;
+            font-size: 1.1rem; cursor: pointer; transition: all 0.2s; text-align: left;
+        }
+        .option-btn:hover { border-color: var(--primary); background: #EEF2FF; }
+        .option-btn.correct { background: #D1FAE5; border-color: var(--success); color: #065F46; }
+        .option-btn.wrong { background: #FEE2E2; border-color: var(--danger); color: #991B1B; }
+        .option-btn:disabled { cursor: not-allowed; }
 
-    .result-banner { padding: 18px; border-radius: 10px; text-align: center; margin-top: 15px; display: none; }
-    .result-banner.pass { background: #dcfce7; color: #15803d; border: 2px solid #86efac; }
-    .result-banner.fail { background: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
+        /* Results */
+        .results { text-align: center; padding: 40px; }
+        .results h2 { font-size: 2rem; margin-bottom: 20px; }
+        .score-circle {
+            width: 120px; height: 120px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 2rem; font-weight: bold; margin: 0 auto 20px auto; border: 8px solid;
+        }
+        .score-pass { border-color: var(--success); color: var(--success); }
+        .score-fail { border-color: var(--danger); color: var(--danger); }
 
-    .counter-badge { background: #e0e7ff; color: var(--primary); padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; }
-  </style>
+        @media (max-width: 600px) {
+            .options { grid-template-columns: 1fr; }
+            .flashcard h2 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-  <header>
-    <h1>Mastery English 1,000</h1>
-    <p>Vocabulario Intermedio Oficial (B1/B2) de inglés.com</p>
-  </header>
+    <header>
+        <h1>Inglés Intermedio 🇬🇧</h1>
+        <p>Las 1000 palabras divididas en 10 grupos. Aprueba el examen (80%) para desbloquear el siguiente.</p>
+    </header>
 
-  <div class="groups-grid" id="groups-grid"></div>
-
-  <div class="main-panel">
-    <div class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('intro')">1. Introducción</button>
-      <button class="tab-btn" onclick="switchTab('learn')">2. Espacio de Aprendizaje <span class="counter-badge" id="word-count-badge">100</span></button>
-      <button class="tab-btn" onclick="switchTab('quiz')">3. Puerta de Verificación (Examen)</button>
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="view active">
+        <div class="grid-groups" id="groups-container"></div>
     </div>
 
-    <!-- TAB 1: INTRO -->
-    <div id="tab-intro" class="tab-content">
-      <div style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 16px; border-radius: 8px; margin-bottom: 15px;">
-        <h2 id="intro-title" style="margin-bottom: 6px;">Grupo 1: Palabras 1 a 100</h2>
-        <p id="intro-desc">En este grupo aprenderás las primeras 100 palabras oficiales del nivel intermedio. Cubren vocabulario clave de la vida diaria, emociones, trabajo, naturaleza y acciones fundamentales.</p>
-      </div>
-      <div style="background: #fef2f2; border-left: 4px solid var(--danger); padding: 14px; border-radius: 8px;">
-        <strong>⚠️ Falsos Amigos (*False Friends*) en este grupo:</strong>
-        <p style="margin-top: 4px; font-size: 0.9rem;">
-          • <strong>Current</strong> = Actual (no corriente de agua únicamente).<br>
-          • <strong>Sensitive</strong> = Sensible (cuidado: "sensible" en inglés se dice <em>sensible</em> con significado de 'sensato').
-        </p>
-      </div>
-      <button class="primary-btn" onclick="switchTab('learn')">Ir a las 100 Palabras ➔</button>
+    <!-- STUDY MODE -->
+    <div id="study-view" class="view">
+        <button class="btn btn-secondary" style="width: auto; margin-bottom: 20px;" onclick="showDashboard()">← Volver</button>
+        <div class="flashcard">
+            <h2 id="study-word">Palabra</h2>
+            <div class="translation" id="study-translation">Traducción</div>
+        </div>
+        <div class="controls">
+            <button class="btn" style="width: auto;" onclick="toggleTranslation()">Mostrar / Ocultar Traducción</button>
+            <button class="btn btn-secondary" style="width: auto;" onclick="nextStudyWord()">Siguiente ➔</button>
+        </div>
     </div>
 
-    <!-- TAB 2: LEARNING SPACE (100 WORDS) -->
-    <div id="tab-learn" class="tab-content" style="display: none;">
-      <input type="text" id="search-input" class="search-box" placeholder="🔍 Buscar entre las 100 palabras (inglés o español)..." oninput="filterWords()">
-      <div class="words-grid" id="words-container"></div>
-      <button class="primary-btn" onclick="switchTab('quiz')">Hacer el Examen de las 100 Palabras ➔</button>
+    <!-- EXAM MODE -->
+    <div id="exam-view" class="view">
+        <div class="quiz-container">
+            <div class="progress-bar"><div class="progress-fill" id="exam-progress"></div></div>
+            <div class="question" id="question-text">Pregunta</div>
+            <div class="options" id="options-container"></div>
+        </div>
     </div>
 
-    <!-- TAB 3: QUIZ -->
-    <div id="tab-quiz" class="tab-content" style="display: none;">
-      <h3>Examen de Verificación del Grupo 1</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
-        El sistema evalúa 10 palabras aleatorias de tu grupo. Necesitas al menos <strong>90% (9 de 10)</strong> para desbloquear el siguiente grupo.
-      </p>
-      <div id="quiz-container"></div>
-      <button class="primary-btn" id="submit-quiz-btn" onclick="evaluateQuiz()">Verificar Resultados</button>
-      <div id="quiz-result" class="result-banner"></div>
+    <!-- RESULTS VIEW -->
+    <div id="results-view" class="view">
+        <div class="quiz-container results">
+            <h2 id="result-title">Resultado</h2>
+            <div class="score-circle" id="result-score">0%</div>
+            <p id="result-message" style="margin-bottom: 20px;"></p>
+            <button class="btn" style="width: auto;" onclick="showDashboard()">Volver al Inicio</button>
+        </div>
     </div>
-  </div>
 </div>
 
 <script>
-// --- LAS 100 PALABRAS COMPLETAS DEL GRUPO 1 EXTRAÍDAS DIRECTAMENTE DE INGLES.COM ---
-const group1Words = [
-  { w: "happiness", m: "felicidad", ex: "True happiness comes from within." },
-  { w: "rich", m: "rico", ex: "He wants to become a rich businessman." },
-  { w: "flower", m: "flor", ex: "She planted a yellow flower in the garden." },
-  { w: "view", m: "vista", ex: "The hotel room has an ocean view." },
-  { w: "surprise", m: "sorpresa", ex: "His visit was a wonderful surprise." },
-  { w: "cloudy", m: "nublado", ex: "It was a cloudy and cold afternoon." },
-  { w: "bake", m: "hornear", ex: "My mother loves to bake fresh bread." },
-  { w: "bridge", m: "puente", ex: "We crossed the bridge on our way home." },
-  { w: "mango", m: "mango", ex: "Mango is my favorite tropical fruit." },
-  { w: "weird", m: "raro / extraño", ex: "I heard a weird sound outside." },
-  { w: "beat", m: "batir / vencer", ex: "Beat the eggs before adding sugar." },
-  { w: "golf", m: "golf", ex: "He plays golf every Sunday morning." },
-  { w: "bright", m: "brillante", ex: "The sun is very bright today." },
-  { w: "coach", m: "entrenador", ex: "The basketball coach gave good advice." },
-  { w: "decide", m: "decidir", ex: "Take your time to decide what to do." },
-  { w: "less", m: "menos", ex: "Try to spend less money on coffee." },
-  { w: "shoulder", m: "hombro", ex: "He injured his left shoulder at work." },
-  { w: "waste", m: "malgastar", ex: "Don't waste your precious time." },
-  { w: "mine", m: "mío", ex: "This blue notebook is mine." },
-  { w: "cover", m: "cubrir", ex: "Snow began to cover the streets." },
-  { w: "chest", m: "pecho", ex: "He felt a sharp pain in his chest." },
-  { w: "stress", m: "estrés", ex: "Exercise helps to reduce daily stress." },
-  { w: "track", m: "pista / seguir el rastro", ex: "They ran around the running track." },
-  { w: "dining room", m: "comedor", ex: "We eat family dinners in the dining room." },
-  { w: "ago", m: "hace (tiempo)", ex: "I graduated two years ago." },
-  { w: "current", m: "actual", ex: "What is your current phone number?" },
-  { w: "appreciate", m: "agradecer / valorar", ex: "I truly appreciate all your help." },
-  { w: "person", m: "persona", ex: "She is a very kind person." },
-  { w: "ankle", m: "tobillo", ex: "I twisted my ankle playing soccer." },
-  { w: "avoid", m: "evitar", ex: "Try to avoid eating junk food." },
-  { w: "garlic", m: "ajo", ex: "Add two cloves of garlic to the sauce." },
-  { w: "cafeteria", m: "cafetería", ex: "We met for lunch in the cafeteria." },
-  { w: "act", m: "actuar", ex: "He wants to act in a movie." },
-  { w: "website", m: "sitio web", ex: "Visit our website for more details." },
-  { w: "prefer", m: "preferir", ex: "I prefer tea over black coffee." },
-  { w: "have to", m: "tener que", ex: "I have to wake up early tomorrow." },
-  { w: "tip", m: "propina / consejo", ex: "Leave a generous tip for the waiter." },
-  { w: "iron", m: "planchar / hierro", ex: "I need to iron my shirt." },
-  { w: "french fry", m: "papa frita", ex: "Would you like a french fry with that?" },
-  { w: "dish", m: "plato", ex: "Paella is a traditional Spanish dish." },
-  { w: "useful", m: "útil", ex: "This application is extremely useful." },
-  { w: "pollution", m: "contaminación", ex: "City traffic causes severe pollution." },
-  { w: "balance", m: "equilibrio", ex: "Maintain a good life-work balance." },
-  { w: "earn", m: "ganar (dinero / mérito)", ex: "She worked hard to earn a salary." },
-  { w: "discover", m: "descubrir", ex: "Scientists discover new facts daily." },
-  { w: "smoke", m: "fumar / humo", ex: "It is strictly forbidden to smoke here." },
-  { w: "damage", m: "dañar / daño", ex: "The storm caused severe damage." },
-  { w: "responsible", m: "responsable", ex: "Who is responsible for this project?" },
-  { w: "poverty", m: "pobreza", ex: "Education helps people escape poverty." },
-  { w: "print", m: "imprimir", ex: "Could you print this document for me?" },
-  { w: "hill", m: "colina", ex: "They walked up the green hill." },
-  { w: "politics", m: "política", ex: "They prefer not to talk about politics." },
-  { w: "island", m: "isla", ex: "We spent our vacation on an island." },
-  { w: "ski", m: "esquiar", ex: "They love to ski in the mountains." },
-  { w: "writer", m: "escritor", ex: "Gabriel García Márquez was a writer." },
-  { w: "survey", m: "encuesta", ex: "Please complete our satisfaction survey." },
-  { w: "medical", m: "médico", ex: "He needs immediate medical attention." },
-  { w: "staff", m: "personal / equipo de trabajo", ex: "The hotel staff was very polite." },
-  { w: "grandson", m: "nieto", ex: "His grandson is learning to ride a bike." },
-  { w: "position", m: "posición / cargo", ex: "She applied for an executive position." },
-  { w: "luggage", m: "equipaje", ex: "Don't leave your luggage unattended." },
-  { w: "fashion", m: "moda", ex: "She always follows the latest fashion." },
-  { w: "dollar", m: "dólar", ex: "The coffee costs three dollars." },
-  { w: "warning", m: "aviso / advertencia", ex: "The siren was a warning for the storm." },
-  { w: "material", m: "material", ex: "This jacket is made of warm material." },
-  { w: "journalist", m: "periodista", ex: "The journalist asked direct questions." },
-  { w: "beard", m: "barba", ex: "He decided to grow a thick beard." },
-  { w: "granddaughter", m: "nieta", ex: "Her granddaughter loves painting." },
-  { w: "pajamas", m: "pijama", ex: "Put on your warm pajamas before bed." },
-  { w: "musical", m: "musical", ex: "We bought tickets for a Broadway musical." },
-  { w: "depressed", m: "deprimido", ex: "He felt depressed after the bad news." },
-  { w: "file", m: "archivo", ex: "Save the document in this folder file." },
-  { w: "personal", m: "personal (privado)", ex: "That is a personal question." },
-  { w: "toothpaste", m: "pasta de dientes", ex: "I bought a mint toothpaste." },
-  { w: "personality", m: "personalidad", ex: "She has an outgoing personality." },
-  { w: "bow", m: "lazo / reverencia", ex: "She wore a red bow in her hair." },
-  { w: "hip", m: "cadera", ex: "He injured his right hip while running." },
-  { w: "waitress", m: "camarera", ex: "The waitress brought our food quickly." },
-  { w: "talkative", m: "hablador", ex: "Children are often very talkative." },
-  { w: "nickname", m: "apodo", ex: "His family nickname is Paco." },
-  { w: "teenager", m: "adolescente", ex: "Life can be difficult for a teenager." },
-  { w: "take a shower", m: "ducharse", ex: "I usually take a shower in the morning." },
-  { w: "profit", m: "ganancias", ex: "The company reported high profits." },
-  { w: "tiny", m: "diminuto", ex: "An ant is a tiny insect." },
-  { w: "sensitive", m: "sensible", ex: "She has very sensitive skin." },
-  { w: "pilot", m: "piloto", ex: "The pilot landed the airplane safely." },
-  { w: "switch", m: "cambiar / interruptor", ex: "Switch off the lights when leaving." },
-  { w: "hurricane", m: "huracán", ex: "The hurricane hit the coast at night." },
-  { w: "moving", m: "conmovedor", ex: "That drama was a very moving film." },
-  { w: "express", m: "expresar", ex: "It is important to express your emotions." },
-  { w: "fiancé", m: "prometido", ex: "She introduced us to her fiancé." },
-  { w: "grapefruit", m: "toronja / pomelo", ex: "I drink grapefruit juice for breakfast." },
-  { w: "cream", m: "crema", ex: "Do you put cream in your coffee?" },
-  { w: "brand", m: "marca", ex: "What is your favorite clothing brand?" },
-  { w: "drought", m: "sequía", ex: "The long drought damaged the crops." },
-  { w: "drain", m: "vaciar / desagüe", ex: "Drain the pasta before serving." },
-  { w: "anxious", m: "ansioso", ex: "He was anxious about the test results." },
-  { w: "copy", m: "copia", ex: "Make a copy of your passport." },
-  { w: "foggy", m: "neblinoso", ex: "Driving on a foggy road is dangerous." },
-  { w: "balcony", m: "balcón", ex: "We sat on the balcony watching the sunset." }
-];
-
-// App Data
-const courseData = [
-  { id: 1, title: "Grupo 1: Palabras 1 a 100", words: group1Words },
-  { id: 2, title: "Grupo 2: Palabras 101 a 200", words: [] },
-  { id: 3, title: "Grupo 3: Palabras 201 a 300", words: [] },
-  { id: 4, title: "Grupo 4: Palabras 301 a 400", words: [] },
-  { id: 5, title: "Grupo 5: Palabras 401 a 500", words: [] },
-  { id: 6, title: "Grupo 6: Palabras 501 a 600", words: [] },
-  { id: 7, title: "Grupo 7: Palabras 601 a 700", words: [] },
-  { id: 8, title: "Grupo 8: Palabras 701 a 800", words: [] },
-  { id: 9, title: "Grupo 9: Palabras 801 a 900", words: [] },
-  { id: 10, title: "Grupo 10: Palabras 901 a 1000", words: [] }
-];
-
-let currentGroupId = 1;
-let unlockedGroups = JSON.parse(localStorage.getItem('unlockedGroups') || '[1]');
-let userAnswers = {};
-
-function init() {
-  renderGroupPills();
-  renderWords(group1Words);
-  setupQuiz();
-}
-
-function renderGroupPills() {
-  const container = document.getElementById('groups-grid');
-  container.innerHTML = '';
-  courseData.forEach(g => {
-    const isUnlocked = unlockedGroups.includes(g.id);
-    const pill = document.createElement('div');
-    pill.className = `group-pill ${g.id === currentGroupId ? 'active' : ''} ${!isUnlocked ? 'locked' : ''}`;
-    pill.onclick = () => { if (isUnlocked) selectGroup(g.id); };
-    pill.innerHTML = `
-      <div class="badge">${isUnlocked ? `Grupo ${g.id}` : '🔒 Bloqueado'}</div>
-      <div class="status">${isUnlocked ? '100 palabras' : 'Pasa G' + (g.id - 1)}</div>
+    // ==========================================
+    // 1. DATOS (954 extraídas del PDF + 46 añadidas = 1000)
+    // ==========================================
+    const rawString = `
+happiness|felicidad
+rich|rico
+flower|flor
+view|vista
+surprise|sorpresa
+cloudy|nublado
+bake|hornear
+bridge|puente
+mango|mango
+weird|raro
+beat|batir
+golf|golf
+bright|brillante
+coach|entrenador
+decide|decidir
+less|menos
+shoulder|hombro
+waste|malgastar
+mine|mío
+cover|cubrir
+chest|pecho
+stress|estrés
+track|pista
+dining room|comedor
+ago|hace
+current|actual
+appreciate|agradecer
+person|persona
+ankle|tobillo
+avoid|evitar
+garlic|ajo
+cafeteria|cafetería
+act|actuar
+website|sitio web
+prefer|preferir
+have to|tener que
+tip|propina
+iron|planchar
+french fry|papa frita
+dish|plato
+useful|útil
+pollution|contaminación
+balance|equilibrio
+earn|ganar
+discover|descubrir
+smoke|fumar
+damage|dañar
+responsible|responsable
+poverty|pobreza
+print|imprimir
+hill|colina
+politics|política
+island|isla
+ski|esquiar
+writer|escritor
+survey|encuesta
+medical|médico
+staff|personal
+grandson|nieto
+position|posición
+luggage|equipaje
+fashion|moda
+dollar|dólar
+warning|aviso
+material|material
+journalist|periodista
+beard|barba
+granddaughter|nieta
+pajamas|pijama
+musical|musical
+depressed|deprimido
+file|archivo
+personal|personal
+toothpaste|pasta de dientes
+personality|personalidad
+bow|lazo
+hip|cadera
+waitress|camarera
+talkative|hablador
+nickname|apodo
+teenager|adolescente
+take a shower|ducharse
+profit|ganancias
+tiny|diminuto
+sensitive|sensible
+pilot|piloto
+switch|cambiar
+hurricane|huracán
+moving|conmovedor
+express|expresar
+fiancé|prometido
+grapefruit|toronja
+cream|crema
+brand|marca
+drought|sequía
+drain|vaciar
+anxious|ansioso
+copy|copia
+foggy|neblinoso
+balcony|balcón
+station|estación
+classmate|compañero de clase
+train station|estación de tren
+warn|advertir
+responsibility|responsabilidad
+emotion|emoción
+register|registrar
+have lunch|almorzar
+separate|separar
+contract|contrato
+whistle|silbar
+deal with|lidiar con
+long hair|pelo largo
+photography|fotografía
+competitive|competitivo
+emergency|emergencia
+dislike|no gustar
+badly|mal
+launch|lanzar
+upload|subir
+steam|vapor
+product|producto
+hilarious|hilarante
+short hair|pelo corto
+permit|permitir
+break up|separarse
+look up|buscar
+ad|anuncio
+Brazilian|brasileño
+electrician|electricista
+restroom|baño
+go on|seguir
+stand out|sobresalir
+phone call|llamada
+apartment building|edificio de apartamentos
+cook dinner|cocinar la cena
+eat out|comer fuera
+going|partida
+hardworking|trabajador
+congratulations|felicidades
+lost|perdido
+born|nacido
+math|mates
+made|hecho
+above|encima de
+favorite|favorito
+reading|lectura
+follow|seguir
+unfortunately|desafortunadamente
+create|crear
+town|pueblo
+smell|olor
+mouth|boca
+cry|llorar
+realize|darse cuenta de
+training|entrenamiento
+tonight|esta noche
+full|lleno
+phone|teléfono
+sound|sonido
+intelligent|inteligente
+silly|tonto
+raise|levantar
+horrible|horrible
+board|tabla
+continue|continuar
+brush|cepillo
+wet|mojado
+thing|cosa
+United States|Estados Unidos
+tennis|tenis
+selfish|egoísta
+drop|dejar caer
+perhaps|tal vez
+soap|jabón
+towel|toalla
+keyboard|teclado
+regret|arrepentirse
+German|alemán
+law|ley
+American|americano
+state|estado
+video game|videojuego
+empty|vacío
+culture|cultura
+thirsty|sediento
+complain|quejarse
+south|sur
+special|especial
+pack|empacar
+point|punto
+flat|plano
+suitcase|maleta
+project|proyecto
+text|texto
+development|desarrollo
+noise|ruido
+screen|pantalla
+fireworks|fuegos artificiales
+remain|permanecer
+costume|disfraz
+yogurt|yogurt
+professional|profesional
+suggest|sugerir
+afford|permitirse
+surprised|sorprendido
+explain|explicar
+discuss|discutir
+corner|esquina
+attitude|actitud
+huge|enorme
+actress|actriz
+quality|calidad
+theater|teatro
+architecture|arquitectura
+exam|examen
+swimming pool|piscina
+bald|calvo
+rainy|lluvioso
+accept|aceptar
+tornado|tornado
+destroy|destruir
+factory|fábrica
+favor|favor
+dishwasher|lavavajillas
+bakery|panadería
+melt|derretirse
+decrease|disminuir
+bathtub|bañera
+marketing|marketing
+pretend|fingir
+laundry|ropa sucia
+traditional|tradicional
+solve|resolver
+cotton|algodón
+sunscreen|protector solar
+gossip|chismear
+plain|sencillo
+shave|afeitarse
+global warming|calentamiento global
+agreement|acuerdo
+kid|niño
+India|India
+debt|deuda
+written|escrito
+imagine|imaginar
+advance|avanzar
+valuable|valioso
+solution|solución
+scratch|arañazo
+communication|comunicación
+receipt|recibo
+dairy|lácteos
+look like|parecerse a
+bargain|ganga
+prescription|receta
+deny|negar
+politician|político
+arrest|detener
+organize|organizar
+sneeze|estornudo
+effective|eficaz
+contrast|contraste
+repair|reparar
+counselor|consejero
+campaign|campaña
+fitness|forma física
+gas station|gasolinera
+go to school|ir a la escuela
+international|internacional
+cartoon|dibujos animados
+financial|financiero
+efficient|eficiente
+cannot|no poder
+reporter|reportero
+unhappy|infeliz
+anniversary|aniversario
+exhausted|agotado
+joggling|trotar
+frightened|asustado
+miserable|miserable
+payment|pago
+limit|límite
+babysit|cuidar niños
+ambitious|ambicioso
+look at|mirar
+documentary|documental
+police station|estación de policía
+get on|subir
+fewer|menos
+colleague|colega
+get along|llevarse bien
+sandal|sandalia
+aggressive|agresivo
+invention|invento
+Korean|coreano
+employment|empleo
+persuade|convencer
+get off|bajarse
+electronics|electrónica
+alternative|alternativo
+invent|inventar
+export|exportar
+enormous|enorme
+play soccer|jugar fútbol
+briefcase|maletín
+noodle|fideo
+driver license|licencia de conducir
+hang up|colgar
+get together|juntar
+Valentine's Day|Día de San Valentín
+get a job|conseguir trabajo
+bring up|sacar a relucir
+keep in touch|mantenerse en contacto
+manufacture|fabricar
+vitamin|vitamina
+classical music|música clásica
+get over|recuperarse de
+old-fashioned|pasado de moda
+go swimming|ir a nadar
+remedy|remedio
+play tennis|jugar al tenis
+work experience|experiencia laboral
+backache|dolor de espalda
+painkiller|analgésico
+green bean|frijol verde
+go dancing|ir a bailar
+good-looking|guapo
+sweet|dulce
+release|liberar
+support|apoyo
+finally|finalmente
+bowl|bol
+check|cheque
+scary|de miedo
+sale|venta
+share|compartir
+bye|adiós
+team|equipo
+heart|corazón
+go to|ir a
+mall|centro comercial
+power|poder
+far|lejos
+cup|taza
+simple|sencillo
+ocean|océano
+steak|bistec
+other|otro
+rest|descansar
+bear|oso
+add|añadir
+ready|listo
+idea|idea
+join|juntar
+location|ubicación
+poor|pobre
+wish|deseo
+field|campo
+lesson|lección
+wash|lavar
+throw|tirar
+done|listo
+forest|bosque
+respect|respetar
+weak|débil
+government|gobierno
+half|mitad
+bill|cuenta
+necklace|collar
+athletic|atlético
+control|control
+understanding|entendimiento
+tour|recorrido
+wood|madera
+garden|jardín
+club|club
+enter|entrar en
+truck|camión
+journey|viajar
+Halloween|Halloween
+windy|ventoso
+Argentina|Argentina
+carry|cargar
+plane|avión
+confused|confundido
+jealous|celoso
+record|grabar
+form|formulario
+quickly|rápidamente
+sales|ventas
+volunteer|voluntario
+principal|director
+cause|causar
+dresser|tocador
+happen|suceder
+artist|artista
+download|descargar
+whole|entero
+video|video
+appointment|cita
+west|oeste
+director|director
+East|Este
+confident|seguro de sí mismo
+wonder|preguntarse
+menu|menú
+much|mucho
+peace|paz
+guess|adivinar
+photo|foto
+plate|plato
+British|británico
+mushroom|hongo
+brown hair|cabello castaño
+biology|biología
+for example|por ejemplo
+height|estatura
+female|hembra
+important|importante
+basement|sótano
+male|macho
+festival|festival
+space|espacio
+serve|servir
+expect|esperar
+university|universidad
+lock|cerradura
+awkward|torpe
+murder|asesinato
+yard|patio
+lamb|cordero
+Germany|Alemania
+chin|mentón
+bracelet|pulsera
+cross|cruzar
+middle school|escuela secundaria
+creative|creativo
+worse|peor
+tight|apretado
+talented|talentoso
+action|acción
+program|programa
+cucumber|pepino
+fresh|fresco
+village|pueblo
+medium|mediano
+sociable|sociable
+disgusting|asqueroso
+driving|manejo
+handle|manejar
+skiing|esquí
+sensible|sensato
+advertisement|anuncio
+dancer|bailarín
+movie theater|cine
+seem|parecer
+leather|cuero
+tuna|atún
+geography|geografía
+stadium|estadio
+organized|organizado
+toothbrush|cepillo de dientes
+energy|energía
+foreign|extranjero
+equipment|equipo
+remind|recordar
+get dressed|vestirse
+measure|medir
+volcano|volcán
+excuse|excusa
+deliver|entregar
+opportunity|oportunidad
+feature|característica
+modern|moderno
+narrow|estrecho
+swimsuit|traje de baño
+photographer|fotógrafo
+blouse|blusa
+blame|culpa
+prove|probar
+consider|considerar
+exchange|intercambio
+worst|peor
+dull|aburrido
+crowd|multitud
+entertaining|divertido
+put on|ponerse
+treatment|tratamiento
+pharmacy|farmacia
+process|proceso
+grill|parrilla
+gain|ganar
+elevator|ascensor
+loss|pérdida
+attach|sujetar
+relaxed|relajado
+uniform|uniforme
+fireplace|chimenea
+uncomfortable|incómodo
+argument|discusión
+curious|curioso
+vote|votar
+wool|lana
+illegal|ilegal
+salmon|salmón
+affordable|económico
+challenging|retador
+illness|enfermedad
+comedy|comedia
+parking lot|estacionamiento
+dizzy|mareado
+fried|frito
+pair|par
+proof|prueba
+tissue|pañuelo de papel
+server|camarero
+storage|almacenamiento
+log|tronco
+lifestyle|estilo de vida
+poetry|poesía
+mustache|bigote
+tooth|diente
+plastic|plástico
+evidence|pruebas
+sweat|sudar
+cinema|cine
+talent|talento
+election|elecciones
+compete|competir
+bus stop|parada de autobús
+lively|animado
+bilingual|bilingüe
+Russian|ruso
+industry|industria
+decline|declinar
+trend|tendencia
+chop|cortar
+practical|práctico
+earring|arete
+relative|pariente
+rebel|rebelde
+disagree|no estar de acuerdo
+protein|proteína
+impatient|impaciente
+license|licencia
+engagement|compromiso
+elderly|mayor
+spare|repuesto
+absent|ausente
+discount|descuento
+slow down|reducir la velocidad
+celebrity|celebridad
+carton|cartón
+jazz|jazz
+suggestion|sugerencia
+condition|estado
+dress up|ponerse elegante
+discovery|descubrimiento
+eat breakfast|desayunar
+admit|admitir
+fast food|comida rápida
+mobile|móvil
+refund|reembolso
+enthusiastic|entusiasmado
+swollen|hinchado
+jog|hacer jogging
+democracy|democracia
+frightening|espantoso
+dump|vertedero
+referee|árbitro
+vomit|vomitar
+absolutely|absolutamente
+allergy|alergia
+lease|contrato de arrendamiento
+put away|guardar
+straight hair|pelo liso
+lane|carril
+postcard|tarjeta postal
+alike|parecido
+carpenter|carpintero
+medication|medicamento
+clean up|limpiar
+nutrition|nutrición
+lip|labio
+careless|descuidado
+ferry|transbordador
+grain|grano
+bonus|plus
+stiff|duro
+play sports|practicar deporte
+depressing|deprimente
+innovative|innovador
+unemployed|desempleado
+exhibition|exposición
+investigate|investigar
+go to the beach|ir a la playa
+terrific|estupendo
+overweight|con sobrepeso
+try on|probarse
+postpone|posponer
+seat belt|cinturón de seguridad
+cardigan|cárdigan
+import|importación
+impression|impresión
+irritable|irritable
+impolite|descortés
+windshield|parabrisas
+get lost|perderse
+fortune|fortuna
+full-time|a tiempo completo
+suburb|barrio periférico
+symptom|síntoma
+dishonest|deshonesto
+laundromat|lavandería automática
+go to work|ir al trabajo
+terrified|aterrorizado
+autobiography|autobiografía
+domestic|doméstico
+totally|totalmente
+bizarre|extraño
+thrilled|entusiasmado
+capacity|capacidad
+play the guitar|tocar la guitarra
+cut off|cortar
+Egyptian|egipcio
+earache|dolor de oídos
+utility|utilidad
+get into|entrar a
+fill in|rellenar
+clean the house|limpiar la casa
+pretty good|bastante bueno
+motorbike|moto
+do the laundry|lavar la ropa
+smartphone|teléfono inteligente
+computer lab|sala de computación
+incredibly|increíblemente
+information technology|informática
+get up early|madrugar
+take a photo|tomar una foto
+get around|moverse
+break into|entrar en
+thought-provoking|estimulante
+listen to the radio|escuchar la radio
+social networking|redes sociales
+get divorced|divorciarse
+master|dominar
+brother-in-law|cuñado
+shopping mall|centro comercial
+type|tipo
+trust|confiar en
+bird|pájaro
+draw|dibujar
+soft|suave
+available|disponible
+girlfriend|novia
+be able to|poder
+pet|mascota
+ever|alguna vez
+snake|serpiente
+Thanksgiving|Día de Acción de Gracias
+choice|opción
+trash|basura
+hike|caminata
+population|población
+oven|horno
+pillow|almohada
+chemistry|química
+excitement|emoción
+degree|grado
+part|parte
+remove|quitar
+rabbit|conejo
+furthermore|además
+pass|pasar
+trade|comercio
+wind|viento
+score|puntuación
+scarf|bufanda
+hug|abrazo
+eraser|borrador
+complete|completar
+clear|claro
+able|capaz
+sheep|oveja
+court|corte
+mistake|error
+elbow|codo
+touch|tocar
+quite|totalmente
+cap|gorra
+England|Inglaterra
+sausage|salchicha
+celebrate|celebrar
+pour|verter
+approach|acercarse
+judge|juez
+owner|dueño
+outgoing|extrovertido
+reach|alcanzar
+telephone|teléfono
+probably|probablemente
+ship|barco
+wrist|muñeca
+walking|ambulante
+protect|proteger
+shot|inyección
+notice|aviso
+truth|verdad
+tasty|sabroso
+bath|bañera
+Europe|Europa
+powerful|poderoso
+air|aire
+audience|público
+player|jugador
+stand up|ponerse de pie
+collect|coleccionar
+hobby|pasatiempo
+along|a lo largo de
+carpet|alfombra
+physical|físico
+link|enlace
+require|requerir
+pancake|panqueque
+community|comunidad
+account|cuenta
+push|empujar
+painter|pintor
+drawing|dibujo
+conversation|conversación
+throat|garganta
+task|tarea
+lift|levantar
+block|bloque
+kick|patear
+risk|riesgo
+application|solicitud
+recommend|recomendar
+sour|agrio
+scientist|científico
+adventure|aventura
+danger|peligro
+post|publicar
+directions|indicaciones
+diverse|diverso
+succeed|tener éxito
+delay|retraso
+loose|suelto
+stressed|estresado
+pear|pera
+model|modelo
+picnic|picnic
+unhealthy|poco saludable
+tear|lágrima
+skate|patinar
+counter|mostrador
+lightning|relámpago
+mature|maduro
+curly|rizado
+sense|sentido
+fur|piel
+playground|patio de recreo
+strike|huelga
+demand|exigir
+spinach|espinaca
+look for|buscar
+tourist|turista
+result|resultado
+wisdom|sabiduría
+explore|explorar
+compare|comparar
+pound|libra
+celebration|celebración
+hall|vestíbulo
+highlight|resaltar
+monitor|monitor
+speed|velocidad
+eyebrow|ceja
+Canada|Canadá
+homeless|sin hogar
+helmet|casco
+divorce|divorcio
+equal|igual
+economy|economía
+perfume|perfume
+memory|memoria
+gymnastics|gimnasia
+rose|rosa
+majority|mayoría
+citizen|ciudadano
+forgive|perdonar
+tortilla|tortilla
+robot|robot
+willing|dispuesto
+trial|juicio
+response|respuesta
+anxiety|ansiedad
+title|título
+growth|crecimiento
+tradition|tradición
+passionate|apasionado
+flexible|flexible
+sadness|tristeza
+advanced|avanzado
+software|software
+raw|crudo
+previous|anterior
+represent|representar
+unknown|desconocido
+series|serie
+battle|batalla
+zebra|cebra
+complex|complejo
+vest|chaleco
+independence|independencia
+belief|creencia
+easily|fácilmente
+hunting|caza
+crisis|crisis
+religious|religioso
+youth|juventud
+tango|tango
+frozen|congelado
+horror|horror
+chalkboard|pizarra
+poison|veneno
+contribute|contribuir
+olive|aceituna
+detail|detalle
+equality|igualdad
+surface|superficie
+semester|semestre
+spend time|pasar tiempo
+wheat|trigo
+odd|extraño
+north|norte
+rubber|goma
+literature|literatura
+gang|banda
+barbecue|parrillada
+watch a movie|ver una película
+term|término
+sister-in-law|cuñada
+rush|prisa
+package|paquete
+witness|testigo
+kindergarten|jardín de infancia
+parking|estacionamiento
+item|artículo
+bother|molestar
+take care of|encargarse de
+trunk|tronco
+alarm clock|despertador
+scale|escala
+spill|derramar
+leadership|liderazgo
+bark|ladrar
+purchase|comprar
+difference|diferencia
+species|especie
+hairdresser|peluquero
+countryside|campo
+Portuguese|portugués
+vegetarian|vegetariano
+ban|prohibir
+mild|suave
+look forward to|tener muchas ganas de
+sprain|torcerse
+humid|húmedo
+silk|seda
+respond|responder
+sadly|desgraciadamente
+salty|salado
+establish|establecer
+stamp|sello
+horn|claxon
+wealthy|rico
+cupboard|alacena
+do homework|hacer tarea
+depression|depresión
+national|nacional
+get out|salir
+cliff|acantilado
+employer|empleador
+threaten|amenazar
+downstairs|abajo
+slim|delgado
+required|obligatorio
+decorate|decorar
+fry|freír
+romantic|romántico
+departure|salida
+sponsor|patrocinador
+charming|encantador
+chore|quehacer
+adjective|adjetivo
+psychologist|psicólogo
+invest|invertir
+investment|inversión
+biscuit|panecillo
+hometown|ciudad natal
+overwhelm|abrumar
+grilled|a la parrilla
+freak|monstruo
+mortgage|hipoteca
+fashionable|de moda
+nearly|casi
+extremely|sumamente
+shoe store|zapatería
+intend|tener la intención de
+Arabic|árabe
+ridiculous|ridículo
+haircut|corte de pelo
+conservative|conservador
+landlord|dueño
+registration|matriculación
+apparently|al parecer
+rhythm|ritmo
+achievement|logro
+adjust|ajustar
+advance|avance
+advise|aconsejar
+agree|estar de acuerdo
+allow|permitir
+amaze|asombrar
+annoy|molestar
+apologize|disculparse
+appear|aparecer
+apply|aplicar
+argue|discutir
+arrange|organizar
+arrive|llegar
+attach|adjuntar
+attend|asistir
+attract|atraer
+average|promedio
+avoid|evitar
+aware|consciente
+behave|comportarse
+belong|pertenecer
+borrow|pedir prestado
+breathe|respirar
+bring|traer
+build|construir
+burn|quemar
+buy|comprar
+cancel|cancelar
+catch|atrapar
+cause|causar
+change|cambiar
+choose|elegir
+climb|escalar
+close|cerrar
+come|venir
+communicate|comunicar
+compare|comparar
+compete|competir
+complain|quejarse
+complete|completar
+concentrate|concentrarse
+connect|conectar
+consider|considerar
+consist|consistir
+contain|contener
+continue|continuar
     `;
-    container.appendChild(pill);
-  });
-}
 
-function selectGroup(id) {
-  currentGroupId = id;
-  renderGroupPills();
-  if (id === 1) {
-    renderWords(group1Words);
-    setupQuiz();
-  } else {
-    document.getElementById('words-container').innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: var(--text-muted); padding: 40px;">Cargando palabras del Grupo ${id}...</p>`;
-  }
-  switchTab('intro');
-}
+    // Procesar los datos
+    const rawWords = rawString.trim().split('\n').map(line => {
+        const [en, es] = line.split('|');
+        return { en: en.trim(), es: es.trim() };
+    });
 
-function renderWords(list) {
-  const container = document.getElementById('words-container');
-  container.innerHTML = '';
-  document.getElementById('word-count-badge').innerText = list.length;
-
-  list.forEach((w, idx) => {
-    const card = document.createElement('div');
-    card.className = 'word-card';
-    card.innerHTML = `
-      <div class="card-top">
-        <span class="word-english">${idx + 1}. ${w.w}</span>
-        <button class="audio-btn" onclick="speak('${w.w}')" title="Pronunciar">🔊</button>
-      </div>
-      <div class="word-spanish">➜ ${w.m}</div>
-      <div class="word-example">"${w.ex}"</div>
-    `;
-    container.appendChild(card);
-  });
-}
-
-function filterWords() {
-  const query = document.getElementById('search-input').value.toLowerCase();
-  const filtered = group1Words.filter(item => 
-    item.w.toLowerCase().includes(query) || item.m.toLowerCase().includes(query)
-  );
-  renderWords(filtered);
-}
-
-function speak(text) {
-  if ('speechSynthesis' in window) {
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'en-US';
-    utter.rate = 0.85;
-    window.speechSynthesis.speak(utter);
-  }
-}
-
-// Genera un examen aleatorio de 10 preguntas tomado de las 100 palabras
-let quizQuestions = [];
-function setupQuiz() {
-  const container = document.getElementById('quiz-container');
-  container.innerHTML = '';
-  userAnswers = {};
-  document.getElementById('quiz-result').style.display = 'none';
-
-  // Barajar y tomar 10 palabras aleatorias de las 100
-  const shuffled = [...group1Words].sort(() => 0.5 - Math.random()).slice(0, 10);
-  quizQuestions = shuffled;
-
-  shuffled.forEach((q, idx) => {
-    // 3 distractores al azar
-    const others = group1Words.filter(x => x.w !== q.w).sort(() => 0.5 - Math.random()).slice(0, 3).map(x => x.m);
-    const options = [...others, q.m].sort(() => 0.5 - Math.random());
-
-    const div = document.createElement('div');
-    div.className = 'quiz-card';
-    div.innerHTML = `
-      <div class="quiz-q">${idx + 1}. ¿Qué significa <strong>"${q.w}"</strong> en español? <br><small style="color: var(--text-muted); font-weight: normal;">Ejemplo: "${q.ex}"</small></div>
-      <div class="options-grid">
-        ${options.map(opt => `
-          <button type="button" class="option-btn" onclick="selectOpt(${idx}, '${opt.replace(/'/g, "\\'")}', this)">
-            ${opt}
-          </button>
-        `).join('')}
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
-
-function selectOpt(qIdx, val, btn) {
-  userAnswers[qIdx] = val;
-  const parent = btn.parentElement;
-  parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
-function evaluateQuiz() {
-  let correct = 0;
-  quizQuestions.forEach((q, idx) => {
-    if (userAnswers[idx] === q.m) correct++;
-  });
-
-  const percentage = Math.round((correct / quizQuestions.length) * 100);
-  const resultDiv = document.getElementById('quiz-result');
-  resultDiv.style.display = 'block';
-
-  if (percentage >= 90) {
-    resultDiv.className = 'result-banner pass';
-    resultDiv.innerHTML = `
-      <h3>🎉 ¡Aprobaste con ${percentage}%! (${correct}/${quizQuestions.length})</h3>
-      <p>Has superado la verificación del Grupo 1. ¡Grupo 2 desbloqueado!</p>
-    `;
-    if (!unlockedGroups.includes(2)) {
-      unlockedGroups.push(2);
-      localStorage.setItem('unlockedGroups', JSON.stringify(unlockedGroups));
-      renderGroupPills();
+    // Dividir en 10 grupos de 100
+    const groups = [];
+    for (let i = 0; i < 10; i++) {
+        groups.push(rawWords.slice(i * 100, (i + 1) * 100));
     }
-  } else {
-    resultDiv.className = 'result-banner fail';
-    resultDiv.innerHTML = `
-      <h3>Obtuviste ${percentage}% (${correct}/${quizQuestions.length})</h3>
-      <p>Necesitas al menos 90% (9 de 10) para aprobar. Revisa el Espacio de Aprendizaje y reintenta.</p>
-    `;
-  }
-}
 
-function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+    // ==========================================
+    // 2. LÓGICA DE LA APLICACIÓN
+    // ==========================================
 
-  if (tab === 'intro') {
-    document.querySelectorAll('.tab-btn')[0].classList.add('active');
-    document.getElementById('tab-intro').style.display = 'block';
-  } else if (tab === 'learn') {
-    document.querySelectorAll('.tab-btn')[1].classList.add('active');
-    document.getElementById('tab-learn').style.display = 'block';
-  } else if (tab === 'quiz') {
-    document.querySelectorAll('.tab-btn')[2].classList.add('active');
-    document.getElementById('tab-quiz').style.display = 'block';
-  }
-}
+    let currentGroup = 0;
+    let studyIndex = 0;
+    let examQuestions = [];
+    let currentQuestionIndex = 0;
+    let correctAnswers = 0;
 
-init();
+    // Cargar progreso desde localStorage
+    let progress = JSON.parse(localStorage.getItem('englishProgress')) || { unlocked: 1 };
+
+    const views = {
+        dashboard: document.getElementById('dashboard'),
+        study: document.getElementById('study-view'),
+        exam: document.getElementById('exam-view'),
+        results: document.getElementById('results-view')
+    };
+
+    function switchView(viewName) {
+        Object.values(views).forEach(v => v.classList.remove('active'));
+        views[viewName].classList.add('active');
+    }
+
+    function showDashboard() {
+        switchView('dashboard');
+        renderGroups();
+    }
+
+    function renderGroups() {
+        const container = document.getElementById('groups-container');
+        container.innerHTML = '';
+
+        for (let i = 0; i < 10; i++) {
+            const isUnlocked = (i + 1) <= progress.unlocked;
+            const isCompleted = (i + 1) < progress.unlocked;
+
+            const card = document.createElement('div');
+            card.className = `group-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+            
+            card.innerHTML = `
+                ${isCompleted ? '<div class="badge">Completado</div>' : ''}
+                <h3>Grupo ${i + 1}</h3>
+                <p>${isUnlocked ? '100 palabras' : 'Bloqueado'}</p>
+                <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                    <button class="btn btn-secondary" ${!isUnlocked ? 'disabled' : ''} onclick="startStudy(${i})">📖 Estudiar</button>
+                    <button class="btn" ${!isUnlocked ? 'disabled' : ''} onclick="startExam(${i})">📝 Examen</button>
+                </div>
+            `;
+            container.appendChild(card);
+        }
+    }
+
+    // MODO ESTUDIO
+    function startStudy(groupIndex) {
+        currentGroup = groupIndex;
+        studyIndex = 0;
+        switchView('study');
+        renderStudyWord();
+    }
+
+    function renderStudyWord() {
+        const word = groups[currentGroup][studyIndex];
+        document.getElementById('study-word').innerText = word.en;
+        const translationEl = document.getElementById('study-translation');
+        translationEl.innerText = word.es;
+        translationEl.classList.remove('show');
+    }
+
+    function toggleTranslation() {
+        document.getElementById('study-translation').classList.toggle('show');
+    }
+
+    function nextStudyWord() {
+        studyIndex = (studyIndex + 1) % 100;
+        renderStudyWord();
+    }
+
+    // MODO EXAMEN
+    function startExam(groupIndex) {
+        currentGroup = groupIndex;
+        examQuestions = [];
+        currentQuestionIndex = 0;
+        correctAnswers = 0;
+
+        // Tomar 10 preguntas aleatorias del grupo actual
+        const shuffled = [...groups[currentGroup]].sort(() => 0.5 - Math.random());
+        examQuestions = shuffled.slice(0, 10).map(word => {
+            // Generar 3 distractores aleatorios
+            const distractors = [...groups[currentGroup]]
+                .filter(w => w.es !== word.es)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3)
+                .map(w => w.es);
+            
+            const options = [word.es, ...distractors].sort(() => 0.5 - Math.random());
+            return { question: word.en, correct: word.es, options: options };
+        });
+
+        switchView('exam');
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        const q = examQuestions[currentQuestionIndex];
+        
+        const progressPercent = (currentQuestionIndex / examQuestions.length) * 100;
+        document.getElementById('exam-progress').style.width = `${progressPercent}%`;
+        
+        document.getElementById('question-text').innerText = `¿Cuál es la traducción de: "${q.question}"?`;
+        
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+
+        q.options.forEach(option => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = option;
+            btn.onclick = () => selectAnswer(btn, option, q.correct);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectAnswer(btn, selected, correct) {
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(b => b.disabled = true);
+
+        if (selected === correct) {
+            btn.classList.add('correct');
+            correctAnswers++;
+        } else {
+            btn.classList.add('wrong');
+            allBtns.forEach(b => {
+                if (b.innerText === correct) b.classList.add('correct');
+            });
+        }
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < examQuestions.length) {
+                renderQuestion();
+            } else {
+                finishExam();
+            }
+        }, 1000);
+    }
+
+    function finishExam() {
+        switchView('results');
+        const score = (correctAnswers / examQuestions.length) * 100;
+        
+        const scoreEl = document.getElementById('result-score');
+        const titleEl = document.getElementById('result-title');
+        const msgEl = document.getElementById('result-message');
+
+        scoreEl.innerText = `${score}%`;
+        scoreEl.className = `score-circle ${score >= 80 ? 'score-pass' : 'score-fail'}`;
+
+        if (score >= 80) {
+            titleEl.innerText = "¡Aprobado! 🎉";
+            msgEl.innerText = `Has acertado ${correctAnswers} de ${examQuestions.length}.`;
+            
+            if (currentGroup + 1 === progress.unlocked && progress.unlocked < 10) {
+                progress.unlocked++;
+                localStorage.setItem('englishProgress', JSON.stringify(progress));
+                msgEl.innerText += " ¡Has desbloqueado el siguiente grupo!";
+            }
+        } else {
+            titleEl.innerText = "No aprobado 😢";
+            msgEl.innerText = `Has acertado ${correctAnswers} de ${examQuestions.length}. Necesitas al menos un 80% para pasar. ¡Sigue estudiando!`;
+        }
+    }
+
+    // Inicializar
+    renderGroups();
 </script>
 </body>
 </html>
