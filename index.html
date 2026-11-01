@@ -24,11 +24,11 @@
         .container { max-width: 1000px; width: 100%; }
 
         header { text-align: center; margin-bottom: 30px; }
-        header h1 { color: var(--primary); font-size: 2.5rem; margin-bottom: 10px; }
+        header h1 { color: var(--primary); font-size: 2.3rem; margin-bottom: 8px; }
         header p { color: var(--text-light); }
 
         /* Dashboard */
-        .grid-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .grid-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 18px; }
         
         .group-card {
             background: var(--card-bg); border-radius: 12px; padding: 20px; text-align: center;
@@ -38,13 +38,12 @@
         .group-card.unlocked:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
         .group-card.locked { background: #E5E7EB; color: var(--locked); }
         
-        .group-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .group-card h3 { font-size: 1.4rem; margin-bottom: 6px; }
         .group-card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px; }
         
         .btn {
-            background: var(--primary); color: white; border: none; padding: 10px 20px;
+            background: var(--primary); color: white; border: none; padding: 10px 18px;
             border-radius: 8px; cursor: pointer; font-weight: bold; transition: background 0.2s; width: 100%;
-            margin-bottom: 8px;
         }
         .btn:hover { background: var(--primary-hover); }
         .btn:disabled { background: var(--locked); cursor: not-allowed; }
@@ -59,34 +58,44 @@
         .view.active { display: block; }
 
         /* Study Mode */
+        .study-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .word-counter { font-size: 0.95rem; font-weight: 600; color: var(--text-light); }
+        
         .flashcard {
-            background: var(--card-bg); border-radius: 16px; padding: 40px; text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; min-height: 250px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: var(--card-bg); border-radius: 16px; padding: 40px 20px; text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 20px; min-height: 260px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;
         }
-        .flashcard h2 { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
-        .flashcard .translation { font-size: 2rem; color: var(--success); font-weight: bold; opacity: 0; transition: opacity 0.3s; }
+        .flashcard h2 { font-size: 2.8rem; color: var(--primary); margin-bottom: 15px; }
+        .flashcard .translation { font-size: 1.8rem; color: var(--success); font-weight: bold; min-height: 40px; opacity: 0; transition: opacity 0.2s; }
         .flashcard .translation.show { opacity: 1; }
         
-        .controls { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+        .audio-icon-btn {
+            background: #EEF2FF; border: none; color: var(--primary); border-radius: 50%;
+            width: 44px; height: 44px; cursor: pointer; font-size: 1.2rem; margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+        }
+        .audio-icon-btn:hover { background: #E0E7FF; }
+
+        .controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
         .btn-secondary { background: #E5E7EB; color: var(--text); }
         .btn-secondary:hover { background: #D1D5DB; }
 
         /* Exam Mode */
-        .quiz-container { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .quiz-container { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
         .progress-bar { width: 100%; height: 10px; background: #E5E7EB; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
         
-        .question { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
-        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .question { font-size: 1.4rem; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         
         .option-btn {
-            padding: 15px; border: 2px solid #E5E7EB; border-radius: 8px; background: white;
-            font-size: 1.1rem; cursor: pointer; transition: all 0.2s; text-align: left;
+            padding: 14px; border: 2px solid #E5E7EB; border-radius: 8px; background: white;
+            font-size: 1.05rem; cursor: pointer; transition: all 0.2s; text-align: left;
         }
         .option-btn:hover { border-color: var(--primary); background: #EEF2FF; }
-        .option-btn.correct { background: #D1FAE5; border-color: var(--success); color: #065F46; }
-        .option-btn.wrong { background: #FEE2E2; border-color: var(--danger); color: #991B1B; }
+        .option-btn.correct { background: #D1FAE5; border-color: var(--success); color: #065F46; font-weight: bold; }
+        .option-btn.wrong { background: #FEE2E2; border-color: var(--danger); color: #991B1B; font-weight: bold; }
         .option-btn:disabled { cursor: not-allowed; }
 
         /* Results */
@@ -101,7 +110,9 @@
 
         @media (max-width: 600px) {
             .options { grid-template-columns: 1fr; }
-            .flashcard h2 { font-size: 2rem; }
+            .flashcard h2 { font-size: 2.2rem; }
+            .controls { flex-direction: column; width: 100%; }
+            .controls .btn { width: 100% !important; }
         }
     </style>
 </head>
@@ -110,7 +121,7 @@
 <div class="container">
     <header>
         <h1>Inglés Intermedio 🇬🇧</h1>
-        <p>Las 1000 palabras divididas en 10 grupos. Aprueba el examen (80%) para desbloquear el siguiente.</p>
+        <p>1,000 palabras organizadas en 10 grupos. Aprueba el examen (80%) para desbloquear el siguiente.</p>
     </header>
 
     <!-- DASHBOARD -->
@@ -120,13 +131,20 @@
 
     <!-- STUDY MODE -->
     <div id="study-view" class="view">
-        <button class="btn btn-secondary" style="width: auto; margin-bottom: 20px;" onclick="showDashboard()">← Volver</button>
-        <div class="flashcard">
-            <h2 id="study-word">Palabra</h2>
-            <div class="translation" id="study-translation">Traducción</div>
+        <div class="study-header">
+            <button class="btn btn-secondary" style="width: auto;" onclick="showDashboard()">← Volver al Menú</button>
+            <div class="word-counter" id="study-counter">Palabra 1 de 100</div>
         </div>
+
+        <div class="flashcard">
+            <h2 id="study-word">Word</h2>
+            <button class="audio-icon-btn" onclick="speakCurrentWord()" title="Escuchar pronunciación">🔊</button>
+            <div class="translation" id="study-translation" style="margin-top: 15px;">Traducción</div>
+        </div>
+
         <div class="controls">
-            <button class="btn" style="width: auto;" onclick="toggleTranslation()">Mostrar / Ocultar Traducción</button>
+            <button class="btn btn-secondary" style="width: auto;" onclick="prevStudyWord()">← Anterior</button>
+            <button class="btn" style="width: auto;" onclick="toggleTranslation()">Ver / Ocultar Traducción</button>
             <button class="btn btn-secondary" style="width: auto;" onclick="nextStudyWord()">Siguiente ➔</button>
         </div>
     </div>
@@ -153,7 +171,7 @@
 
 <script>
     // ==========================================
-    // 1. DATOS (954 extraídas del PDF + 46 añadidas = 1000)
+    // 1. DATOS (1,000 Palabras Intermedias)
     // ==========================================
     const rawString = `
 happiness|felicidad
@@ -1124,11 +1142,15 @@ contain|contener
 continue|continuar
     `;
 
-    // Procesar los datos
-    const rawWords = rawString.trim().split('\n').map(line => {
-        const [en, es] = line.split('|');
-        return { en: en.trim(), es: es.trim() };
-    });
+    // Procesar datos de forma segura (ignora líneas vacías)
+    const rawWords = rawString
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line.includes('|'))
+        .map(line => {
+            const [en, es] = line.split('|');
+            return { en: en.trim(), es: es.trim() };
+        });
 
     // Dividir en 10 grupos de 100
     const groups = [];
@@ -1146,7 +1168,6 @@ continue|continuar
     let currentQuestionIndex = 0;
     let correctAnswers = 0;
 
-    // Cargar progreso desde localStorage
     let progress = JSON.parse(localStorage.getItem('englishProgress')) || { unlocked: 1 };
 
     const views = {
@@ -1181,7 +1202,7 @@ continue|continuar
                 ${isCompleted ? '<div class="badge">Completado</div>' : ''}
                 <h3>Grupo ${i + 1}</h3>
                 <p>${isUnlocked ? '100 palabras' : 'Bloqueado'}</p>
-                <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
                     <button class="btn btn-secondary" ${!isUnlocked ? 'disabled' : ''} onclick="startStudy(${i})">📖 Estudiar</button>
                     <button class="btn" ${!isUnlocked ? 'disabled' : ''} onclick="startExam(${i})">📝 Examen</button>
                 </div>
@@ -1204,6 +1225,8 @@ continue|continuar
         const translationEl = document.getElementById('study-translation');
         translationEl.innerText = word.es;
         translationEl.classList.remove('show');
+        
+        document.getElementById('study-counter').innerText = `Palabra ${studyIndex + 1} de ${groups[currentGroup].length}`;
     }
 
     function toggleTranslation() {
@@ -1211,8 +1234,23 @@ continue|continuar
     }
 
     function nextStudyWord() {
-        studyIndex = (studyIndex + 1) % 100;
+        studyIndex = (studyIndex + 1) % groups[currentGroup].length;
         renderStudyWord();
+    }
+
+    function prevStudyWord() {
+        studyIndex = (studyIndex - 1 + groups[currentGroup].length) % groups[currentGroup].length;
+        renderStudyWord();
+    }
+
+    function speakCurrentWord() {
+        const word = groups[currentGroup][studyIndex].en;
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+            window.speechSynthesis.speak(utterance);
+        }
     }
 
     // MODO EXAMEN
@@ -1222,10 +1260,8 @@ continue|continuar
         currentQuestionIndex = 0;
         correctAnswers = 0;
 
-        // Tomar 10 preguntas aleatorias del grupo actual
         const shuffled = [...groups[currentGroup]].sort(() => 0.5 - Math.random());
         examQuestions = shuffled.slice(0, 10).map(word => {
-            // Generar 3 distractores aleatorios
             const distractors = [...groups[currentGroup]]
                 .filter(w => w.es !== word.es)
                 .sort(() => 0.5 - Math.random())
@@ -1281,7 +1317,7 @@ continue|continuar
             } else {
                 finishExam();
             }
-        }, 1000);
+        }, 800);
     }
 
     function finishExam() {
@@ -1310,7 +1346,7 @@ continue|continuar
         }
     }
 
-    // Inicializar
+    // Iniciar
     renderGroups();
 </script>
 </body>
