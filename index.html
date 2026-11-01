@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mastery English - 1,000 Intermediate Words</title>
+  <title>Mastery English - 1,000 Palabras Intermedias</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -17,85 +17,82 @@
       --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --radius: 14px;
+      --radius: 12px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 20px; line-height: 1.6; }
-    .container { max-width: 900px; margin: 0 auto; }
+    body { background-color: var(--bg); color: var(--text); padding: 15px; line-height: 1.5; }
+    .container { max-width: 950px; margin: 0 auto; }
 
-    header { text-align: center; margin-bottom: 25px; padding: 20px 0; }
-    header h1 { font-size: 2rem; color: #1e1b4b; font-weight: 800; }
-    header p { color: var(--text-muted); font-size: 1rem; margin-top: 5px; }
+    header { text-align: center; margin-bottom: 20px; padding: 15px 0; }
+    header h1 { font-size: 1.8rem; color: #1e1b4b; font-weight: 800; }
+    header p { color: var(--text-muted); font-size: 0.95rem; margin-top: 4px; }
 
-    /* Group Grid */
-    .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 30px; }
+    /* Groups Selector */
+    .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
     .group-pill {
       background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius);
-      padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative;
+      padding: 10px; text-align: center; cursor: pointer; transition: 0.2s;
     }
-    .group-pill:hover:not(.locked) { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1); }
     .group-pill.active { border-color: var(--primary); background: #eef2ff; }
-    .group-pill.locked { opacity: 0.55; cursor: not-allowed; background: #f1f5f9; }
-    .group-pill .badge { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; }
+    .group-pill.locked { opacity: 0.5; cursor: not-allowed; background: #f1f5f9; }
+    .group-pill .badge { font-size: 0.75rem; font-weight: 700; color: var(--primary); }
     .group-pill.locked .badge { color: var(--text-muted); }
-    .group-pill .status { font-size: 0.8rem; margin-top: 4px; font-weight: 600; }
+    .group-pill .status { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
 
-    /* Main Workspace */
-    .main-panel { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .main-panel { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
 
-    .nav-tabs { display: flex; gap: 10px; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
+    .nav-tabs { display: flex; gap: 8px; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
     .tab-btn {
-      padding: 10px 18px; border: none; background: transparent; font-weight: 700; font-size: 0.95rem;
+      padding: 10px 14px; border: none; background: transparent; font-weight: 700; font-size: 0.9rem;
       color: var(--text-muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px;
     }
     .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-    /* Intro View */
-    .intro-box { background: #f8fafc; border-left: 4px solid var(--primary); padding: 18px; border-radius: 8px; margin-bottom: 20px; }
-    .warning-box { background: #fef2f2; border-left: 4px solid var(--danger); padding: 15px; border-radius: 8px; margin-top: 15px; }
-
-    /* Learning Space */
-    .word-card {
-      border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 15px;
-      transition: all 0.2s; background: white;
+    /* Search Bar in Learn */
+    .search-box {
+      width: 100%; padding: 12px 15px; border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 0.95rem; margin-bottom: 20px; outline: none;
     }
-    .word-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .word-title { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
-    .word-pos { font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-left: 6px; }
-    .audio-btn { background: #e0e7ff; color: var(--primary); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-    .audio-btn:hover { background: #c7d2fe; }
-    .word-meaning { font-size: 1.05rem; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
-    .collocation-box { background: #f1f5f9; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; margin-bottom: 8px; }
-    .example-sentence { color: #334155; font-size: 0.95rem; margin-top: 5px; }
-    .example-translation { color: var(--text-muted); font-size: 0.85rem; font-style: italic; }
+    .search-box:focus { border-color: var(--primary); }
 
-    /* Verification Gate */
-    .quiz-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    /* Words Grid */
+    .words-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .word-card {
+      border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: white;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .word-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .word-english { font-size: 1.15rem; font-weight: 800; color: var(--primary); }
+    .audio-btn { background: #e0e7ff; color: var(--primary); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 0.95rem; }
+    .audio-btn:hover { background: #c7d2fe; }
+    .word-spanish { font-size: 0.95rem; font-weight: 600; color: #334155; margin-bottom: 6px; }
+    .word-example { font-size: 0.85rem; color: #64748b; font-style: italic; background: #f8fafc; padding: 6px 8px; border-radius: 6px; }
+
+    /* Quiz */
+    .quiz-card { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
     .quiz-card:last-child { border-bottom: none; }
-    .quiz-q { font-weight: 700; margin-bottom: 12px; }
-    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .quiz-q { font-weight: 700; margin-bottom: 10px; font-size: 0.95rem; }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .option-btn {
-      padding: 12px; border: 1.5px solid var(--border); border-radius: 8px; background: white;
-      text-align: left; cursor: pointer; font-weight: 500; font-size: 0.95rem; transition: 0.2s;
+      padding: 10px; border: 1.5px solid var(--border); border-radius: 8px; background: white;
+      text-align: left; cursor: pointer; font-size: 0.9rem; font-weight: 500;
     }
     .option-btn:hover { border-color: var(--primary); background: #faf5ff; }
     .option-btn.selected { border-color: var(--primary); background: #eef2ff; color: var(--primary); font-weight: 700; }
     
     .primary-btn {
-      background: var(--primary); color: white; border: none; padding: 14px 28px; border-radius: var(--radius);
-      font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 15px;
+      background: var(--primary); color: white; border: none; padding: 14px; border-radius: 10px;
+      font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; margin-top: 15px;
     }
     .primary-btn:hover { background: var(--primary-hover); }
 
-    .result-banner {
-      padding: 20px; border-radius: var(--radius); text-align: center; margin-top: 20px; display: none;
-    }
+    .result-banner { padding: 18px; border-radius: 10px; text-align: center; margin-top: 15px; display: none; }
     .result-banner.pass { background: #dcfce7; color: #15803d; border: 2px solid #86efac; }
     .result-banner.fail { background: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
 
-    .progress-bar-container { background: #e2e8f0; height: 10px; border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
-    .progress-bar-fill { background: var(--success); height: 100%; width: 10%; transition: width 0.3s; }
+    .counter-badge { background: #e0e7ff; color: var(--primary); padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -103,300 +100,335 @@
 <div class="container">
   <header>
     <h1>Mastery English 1,000</h1>
-    <p>Domina 1,000 palabras intermedias B1/B2 en 10 grupos de 100 palabras</p>
+    <p>Vocabulario Intermedio Oficial (B1/B2) de inglés.com</p>
   </header>
 
-  <div class="progress-bar-container">
-    <div class="progress-bar-fill" id="global-progress"></div>
-  </div>
-
-  <!-- Groups Selector -->
   <div class="groups-grid" id="groups-grid"></div>
 
-  <!-- Main Active Content Area -->
   <div class="main-panel">
     <div class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab('intro')">1. Introducción</button>
-      <button class="tab-btn" onclick="switchTab('learn')">2. Espacio de Aprendizaje</button>
-      <button class="tab-btn" onclick="switchTab('quiz')">3. Puerta de Verificación</button>
+      <button class="tab-btn" onclick="switchTab('learn')">2. Espacio de Aprendizaje <span class="counter-badge" id="word-count-badge">100</span></button>
+      <button class="tab-btn" onclick="switchTab('quiz')">3. Puerta de Verificación (Examen)</button>
     </div>
 
     <!-- TAB 1: INTRO -->
     <div id="tab-intro" class="tab-content">
-      <div class="intro-box">
-        <h2 id="intro-title" style="margin-bottom: 8px;">Grupo 1</h2>
-        <p id="intro-desc"></p>
+      <div style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 16px; border-radius: 8px; margin-bottom: 15px;">
+        <h2 id="intro-title" style="margin-bottom: 6px;">Grupo 1: Palabras 1 a 100</h2>
+        <p id="intro-desc">En este grupo aprenderás las primeras 100 palabras oficiales del nivel intermedio. Cubren vocabulario clave de la vida diaria, emociones, trabajo, naturaleza y acciones fundamentales.</p>
       </div>
-      <div class="warning-box">
-        <strong>⚠️ Falsos Amigos (*False Friends*) y Errores Clave:</strong>
-        <p id="intro-warnings" style="margin-top: 5px; font-size: 0.95rem;"></p>
+      <div style="background: #fef2f2; border-left: 4px solid var(--danger); padding: 14px; border-radius: 8px;">
+        <strong>⚠️ Falsos Amigos (*False Friends*) en este grupo:</strong>
+        <p style="margin-top: 4px; font-size: 0.9rem;">
+          • <strong>Current</strong> = Actual (no corriente de agua únicamente).<br>
+          • <strong>Sensitive</strong> = Sensible (cuidado: "sensible" en inglés se dice <em>sensible</em> con significado de 'sensato').
+        </p>
       </div>
-      <button class="primary-btn" onclick="switchTab('learn')">Comenzar a Estudiar este Grupo ➔</button>
+      <button class="primary-btn" onclick="switchTab('learn')">Ir a las 100 Palabras ➔</button>
     </div>
 
-    <!-- TAB 2: LEARNING SPACE -->
+    <!-- TAB 2: LEARNING SPACE (100 WORDS) -->
     <div id="tab-learn" class="tab-content" style="display: none;">
-      <div id="words-container"></div>
-      <button class="primary-btn" onclick="switchTab('quiz')">Hacer el Examen de Verificación ➔</button>
+      <input type="text" id="search-input" class="search-box" placeholder="🔍 Buscar entre las 100 palabras (inglés o español)..." oninput="filterWords()">
+      <div class="words-grid" id="words-container"></div>
+      <button class="primary-btn" onclick="switchTab('quiz')">Hacer el Examen de las 100 Palabras ➔</button>
     </div>
 
-    <!-- TAB 3: QUIZ / VERIFICATION -->
+    <!-- TAB 3: QUIZ -->
     <div id="tab-quiz" class="tab-content" style="display: none;">
-      <h3 style="margin-bottom: 5px;">Examen de Paso (Mastery Gate)</h3>
-      <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
-        Debes obtener al menos un <strong>90% de aciertos</strong> para desbloquear el siguiente grupo.
+      <h3>Examen de Verificación del Grupo 1</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+        El sistema evalúa 10 palabras aleatorias de tu grupo. Necesitas al menos <strong>90% (9 de 10)</strong> para desbloquear el siguiente grupo.
       </p>
       <div id="quiz-container"></div>
-      <button class="primary-btn" id="submit-quiz-btn" onclick="evaluateQuiz()">Enviar Examen y Verificar</button>
-
+      <button class="primary-btn" id="submit-quiz-btn" onclick="evaluateQuiz()">Verificar Resultados</button>
       <div id="quiz-result" class="result-banner"></div>
     </div>
   </div>
 </div>
 
 <script>
-// --- COURSE DATA STORE (Organized into 10 groups of 100 words) ---
-const courseData = [
-  {
-    id: 1,
-    title: "Grupo 1: Acciones, Rutinas y Decisiones",
-    description: "Este primer grupo contiene las palabras intermedias esenciales para expresar causas, acuerdos, consecuencias y estados emocionales cotidianos.",
-    warnings: "Cuidado con 'Actually' (significa 'en realidad', no 'actualmente') y nunca digas 'I am agree' (se dice 'I agree').",
-    words: [
-      { word: "Abroad", pos: "adv.", meaning: "En el extranjero / fuera del país", collocation: "Study abroad / Go abroad", example: "He decided to study abroad for a year.", exTrans: "Decidió estudiar en el extranjero durante un año." },
-      { word: "Achieve", pos: "v.", meaning: "Lograr, alcanzar (un objetivo)", collocation: "Achieve a goal / Achieve success", example: "With hard work, you will achieve your dreams.", exTrans: "Con trabajo duro, alcanzarás tus sueños." },
-      { word: "Actually", pos: "adv.", meaning: "En realidad, de hecho", collocation: "Actually, I think...", example: "I thought he was British, but actually he is Canadian.", exTrans: "Pensé que era británico, pero en realidad es canadiense." },
-      { word: "Affect", pos: "v.", meaning: "Afectar, influir negativamente o directamente", collocation: "Directly affect / Affect health", example: "Lack of sleep can severely affect your focus.", exTrans: "La falta de sueño puede afectar gravemente tu concentración." },
-      { word: "Agree", pos: "v.", meaning: "Estar de acuerdo", collocation: "Agree with someone / Agree on a topic", example: "I totally agree with your proposal.", exTrans: "Estoy totalmente de acuerdo con tu propuesta." },
-      { word: "Allow", pos: "v.", meaning: "Permitir, dar permiso", collocation: "Allow someone to do something", example: "My job allows me to work from home.", exTrans: "Mi trabajo me permite trabajar desde casa." },
-      { word: "Amount", pos: "n.", meaning: "Cantidad (de algo incontable)", collocation: "A large amount of money / amount of time", example: "A huge amount of water was wasted.", exTrans: "Se desperdició una gran cantidad de agua." },
-      { word: "Annoyed", pos: "adj.", meaning: "Molesto, irritado", collocation: "Get annoyed / Annoyed with someone", example: "She was annoyed because he didn't listen.", exTrans: "Estaba molesta porque él no escuchaba." },
-      { word: "Anxious", pos: "adj.", meaning: "Ansioso, inquieto", collocation: "Feel anxious about something", example: "I feel anxious before speaking in public.", exTrans: "Me siento ansioso antes de hablar en público." },
-      { word: "Apologize", pos: "v.", meaning: "Disculparse, pedir perdón", collocation: "Apologize for doing something", example: "You must apologize for being late.", exTrans: "Debes disculparte por llegar tarde." },
-      { word: "Approach", pos: "n. / v.", meaning: "Enfoque, método / Acercarse", collocation: "A fresh approach / Approach a problem", example: "We need a new approach to solve this bug.", exTrans: "Necesitamos un nuevo enfoque para resolver este error." },
-      { word: "Argue", pos: "v.", meaning: "Discutir, pelear verbalmente", collocation: "Argue with someone about something", example: "They always argue about trivial things.", exTrans: "Siempre discuten por cosas triviales." },
-      { word: "Avoid", pos: "v.", meaning: "Evitar", collocation: "Avoid doing something / Avoid traffic", example: "Try to avoid eating junk food.", exTrans: "Intenta evitar comer comida chatarra." },
-      { word: "Aware", pos: "adj.", meaning: "Consciente, enterado", collocation: "Be aware of risks / Fully aware", example: "Are you aware of the new company rules?", exTrans: "¿Estás al tanto de las nuevas normas de la empresa?" },
-      { word: "Beat", pos: "v.", meaning: "Vencer, derrotar / Latir", collocation: "Beat an opponent / Beat the record", example: "Our team beat the champions yesterday.", exTrans: "Nuestro equipo venció a los campeones ayer." },
-      { word: "Behavior", pos: "n.", meaning: "Comportamiento, conducta", collocation: "Good/bad behavior / Professional behavior", example: "His behavior during the meeting was exemplary.", exTrans: "Su comportamiento durante la reunión fue ejemplar." },
-      { word: "Belong", pos: "v.", meaning: "Pertenecer", collocation: "Belong to someone", example: "Does this backpack belong to you?", exTrans: "¿Esta mochila te pertenece a ti?" },
-      { word: "Blame", pos: "v. / n.", meaning: "Culpar / Culpa", collocation: "Blame someone for / Take the blame", example: "Don't blame others for your own mistakes.", exTrans: "No culpes a otros por tus propios errores." },
-      { word: "Borrow", pos: "v.", meaning: "Pedir prestado (recibir)", collocation: "Borrow something from someone", example: "Can I borrow your laptop for an hour?", exTrans: "¿Puedo pedir prestada tu laptop por una hora?" },
-      { word: "Bother", pos: "v.", meaning: "Molestar / Tomarse la molestia", collocation: "Don't bother / Bother someone", example: "I am sorry to bother you right now.", exTrans: "Siento molestarte en este momento." }
-    ]
-  },
-  // Template groups 2 to 10 with pre-configured structure
-  { id: 2, title: "Grupo 2: Negocios, Trabajo y Metas", description: "Vocabulario de oficina, proyectos y relaciones profesionales.", warnings: "Recuerda distinguir 'Career' (carrera profesional) de 'Degree' (carrera universitaria).", words: [] },
-  { id: 3, title: "Grupo 3: Opiniones, Acuerdos y Debate", description: "Verbos y conectores para dar argumentos sólidos.", warnings: "Aprende el uso de 'consequently' y 'furthermore'.", words: [] },
-  { id: 4, title: "Grupo 4: Sociedad, Tecnología y Mundo", description: "Términos sobre tendencias, sociedad, redes y avances.", warnings: "Distingue entre 'invention' y 'discovery'.", words: [] },
-  { id: 5, title: "Grupo 5: Problemas y Soluciones", description: "Términos para describir fallas, riesgos y resoluciones.", warnings: "Falso amigo: 'compromise' significa 'llegar a un acuerdo', no compromiso formal.", words: [] },
-  { id: 6, title: "Grupo 6: Viajes, Lugares y Cultura", description: "Vocabulario para desenvolverte en aeropuertos, hoteles y ciudades.", warnings: "Cuidado con 'embarrassed' (avergonzado, no embarazada).", words: [] },
-  { id: 7, title: "Grupo 7: Tiempo, Rutinas y Planes", description: "Expresiones temporales y planificación de proyectos.", warnings: "Distingue entre 'schedule' y 'calendar'.", words: [] },
-  { id: 8, title: "Grupo 8: Salud, Mente y Bienestar", description: "Expresiones sobre estado físico, hábitos y nutrición.", warnings: "Uso correcto de 'illness' vs 'disease'.", words: [] },
-  { id: 9, title: "Grupo 9: Conceptos Abstractos y Éxito", description: "Palabras para hablar de suerte, esfuerzo, justicia y valores.", warnings: "Cuidado con 'success' (éxito) y 'exit' (salida).", words: [] },
-  { id: 10, title: "Grupo 10: Phrasal Verbs y Expresiones B2", description: "Phrasal verbs y combinaciones idiomáticas que aportan fluidez nativa.", warnings: "Observa siempre si el phrasal verb es separable o inseparable.", words: [] }
+// --- LAS 100 PALABRAS COMPLETAS DEL GRUPO 1 EXTRAÍDAS DIRECTAMENTE DE INGLES.COM ---
+const group1Words = [
+  { w: "happiness", m: "felicidad", ex: "True happiness comes from within." },
+  { w: "rich", m: "rico", ex: "He wants to become a rich businessman." },
+  { w: "flower", m: "flor", ex: "She planted a yellow flower in the garden." },
+  { w: "view", m: "vista", ex: "The hotel room has an ocean view." },
+  { w: "surprise", m: "sorpresa", ex: "His visit was a wonderful surprise." },
+  { w: "cloudy", m: "nublado", ex: "It was a cloudy and cold afternoon." },
+  { w: "bake", m: "hornear", ex: "My mother loves to bake fresh bread." },
+  { w: "bridge", m: "puente", ex: "We crossed the bridge on our way home." },
+  { w: "mango", m: "mango", ex: "Mango is my favorite tropical fruit." },
+  { w: "weird", m: "raro / extraño", ex: "I heard a weird sound outside." },
+  { w: "beat", m: "batir / vencer", ex: "Beat the eggs before adding sugar." },
+  { w: "golf", m: "golf", ex: "He plays golf every Sunday morning." },
+  { w: "bright", m: "brillante", ex: "The sun is very bright today." },
+  { w: "coach", m: "entrenador", ex: "The basketball coach gave good advice." },
+  { w: "decide", m: "decidir", ex: "Take your time to decide what to do." },
+  { w: "less", m: "menos", ex: "Try to spend less money on coffee." },
+  { w: "shoulder", m: "hombro", ex: "He injured his left shoulder at work." },
+  { w: "waste", m: "malgastar", ex: "Don't waste your precious time." },
+  { w: "mine", m: "mío", ex: "This blue notebook is mine." },
+  { w: "cover", m: "cubrir", ex: "Snow began to cover the streets." },
+  { w: "chest", m: "pecho", ex: "He felt a sharp pain in his chest." },
+  { w: "stress", m: "estrés", ex: "Exercise helps to reduce daily stress." },
+  { w: "track", m: "pista / seguir el rastro", ex: "They ran around the running track." },
+  { w: "dining room", m: "comedor", ex: "We eat family dinners in the dining room." },
+  { w: "ago", m: "hace (tiempo)", ex: "I graduated two years ago." },
+  { w: "current", m: "actual", ex: "What is your current phone number?" },
+  { w: "appreciate", m: "agradecer / valorar", ex: "I truly appreciate all your help." },
+  { w: "person", m: "persona", ex: "She is a very kind person." },
+  { w: "ankle", m: "tobillo", ex: "I twisted my ankle playing soccer." },
+  { w: "avoid", m: "evitar", ex: "Try to avoid eating junk food." },
+  { w: "garlic", m: "ajo", ex: "Add two cloves of garlic to the sauce." },
+  { w: "cafeteria", m: "cafetería", ex: "We met for lunch in the cafeteria." },
+  { w: "act", m: "actuar", ex: "He wants to act in a movie." },
+  { w: "website", m: "sitio web", ex: "Visit our website for more details." },
+  { w: "prefer", m: "preferir", ex: "I prefer tea over black coffee." },
+  { w: "have to", m: "tener que", ex: "I have to wake up early tomorrow." },
+  { w: "tip", m: "propina / consejo", ex: "Leave a generous tip for the waiter." },
+  { w: "iron", m: "planchar / hierro", ex: "I need to iron my shirt." },
+  { w: "french fry", m: "papa frita", ex: "Would you like a french fry with that?" },
+  { w: "dish", m: "plato", ex: "Paella is a traditional Spanish dish." },
+  { w: "useful", m: "útil", ex: "This application is extremely useful." },
+  { w: "pollution", m: "contaminación", ex: "City traffic causes severe pollution." },
+  { w: "balance", m: "equilibrio", ex: "Maintain a good life-work balance." },
+  { w: "earn", m: "ganar (dinero / mérito)", ex: "She worked hard to earn a salary." },
+  { w: "discover", m: "descubrir", ex: "Scientists discover new facts daily." },
+  { w: "smoke", m: "fumar / humo", ex: "It is strictly forbidden to smoke here." },
+  { w: "damage", m: "dañar / daño", ex: "The storm caused severe damage." },
+  { w: "responsible", m: "responsable", ex: "Who is responsible for this project?" },
+  { w: "poverty", m: "pobreza", ex: "Education helps people escape poverty." },
+  { w: "print", m: "imprimir", ex: "Could you print this document for me?" },
+  { w: "hill", m: "colina", ex: "They walked up the green hill." },
+  { w: "politics", m: "política", ex: "They prefer not to talk about politics." },
+  { w: "island", m: "isla", ex: "We spent our vacation on an island." },
+  { w: "ski", m: "esquiar", ex: "They love to ski in the mountains." },
+  { w: "writer", m: "escritor", ex: "Gabriel García Márquez was a writer." },
+  { w: "survey", m: "encuesta", ex: "Please complete our satisfaction survey." },
+  { w: "medical", m: "médico", ex: "He needs immediate medical attention." },
+  { w: "staff", m: "personal / equipo de trabajo", ex: "The hotel staff was very polite." },
+  { w: "grandson", m: "nieto", ex: "His grandson is learning to ride a bike." },
+  { w: "position", m: "posición / cargo", ex: "She applied for an executive position." },
+  { w: "luggage", m: "equipaje", ex: "Don't leave your luggage unattended." },
+  { w: "fashion", m: "moda", ex: "She always follows the latest fashion." },
+  { w: "dollar", m: "dólar", ex: "The coffee costs three dollars." },
+  { w: "warning", m: "aviso / advertencia", ex: "The siren was a warning for the storm." },
+  { w: "material", m: "material", ex: "This jacket is made of warm material." },
+  { w: "journalist", m: "periodista", ex: "The journalist asked direct questions." },
+  { w: "beard", m: "barba", ex: "He decided to grow a thick beard." },
+  { w: "granddaughter", m: "nieta", ex: "Her granddaughter loves painting." },
+  { w: "pajamas", m: "pijama", ex: "Put on your warm pajamas before bed." },
+  { w: "musical", m: "musical", ex: "We bought tickets for a Broadway musical." },
+  { w: "depressed", m: "deprimido", ex: "He felt depressed after the bad news." },
+  { w: "file", m: "archivo", ex: "Save the document in this folder file." },
+  { w: "personal", m: "personal (privado)", ex: "That is a personal question." },
+  { w: "toothpaste", m: "pasta de dientes", ex: "I bought a mint toothpaste." },
+  { w: "personality", m: "personalidad", ex: "She has an outgoing personality." },
+  { w: "bow", m: "lazo / reverencia", ex: "She wore a red bow in her hair." },
+  { w: "hip", m: "cadera", ex: "He injured his right hip while running." },
+  { w: "waitress", m: "camarera", ex: "The waitress brought our food quickly." },
+  { w: "talkative", m: "hablador", ex: "Children are often very talkative." },
+  { w: "nickname", m: "apodo", ex: "His family nickname is Paco." },
+  { w: "teenager", m: "adolescente", ex: "Life can be difficult for a teenager." },
+  { w: "take a shower", m: "ducharse", ex: "I usually take a shower in the morning." },
+  { w: "profit", m: "ganancias", ex: "The company reported high profits." },
+  { w: "tiny", m: "diminuto", ex: "An ant is a tiny insect." },
+  { w: "sensitive", m: "sensible", ex: "She has very sensitive skin." },
+  { w: "pilot", m: "piloto", ex: "The pilot landed the airplane safely." },
+  { w: "switch", m: "cambiar / interruptor", ex: "Switch off the lights when leaving." },
+  { w: "hurricane", m: "huracán", ex: "The hurricane hit the coast at night." },
+  { w: "moving", m: "conmovedor", ex: "That drama was a very moving film." },
+  { w: "express", m: "expresar", ex: "It is important to express your emotions." },
+  { w: "fiancé", m: "prometido", ex: "She introduced us to her fiancé." },
+  { w: "grapefruit", m: "toronja / pomelo", ex: "I drink grapefruit juice for breakfast." },
+  { w: "cream", m: "crema", ex: "Do you put cream in your coffee?" },
+  { w: "brand", m: "marca", ex: "What is your favorite clothing brand?" },
+  { w: "drought", m: "sequía", ex: "The long drought damaged the crops." },
+  { w: "drain", m: "vaciar / desagüe", ex: "Drain the pasta before serving." },
+  { w: "anxious", m: "ansioso", ex: "He was anxious about the test results." },
+  { w: "copy", m: "copia", ex: "Make a copy of your passport." },
+  { w: "foggy", m: "neblinoso", ex: "Driving on a foggy road is dangerous." },
+  { w: "balcony", m: "balcón", ex: "We sat on the balcony watching the sunset." }
 ];
 
-// --- APP STATE ---
+// App Data
+const courseData = [
+  { id: 1, title: "Grupo 1: Palabras 1 a 100", words: group1Words },
+  { id: 2, title: "Grupo 2: Palabras 101 a 200", words: [] },
+  { id: 3, title: "Grupo 3: Palabras 201 a 300", words: [] },
+  { id: 4, title: "Grupo 4: Palabras 301 a 400", words: [] },
+  { id: 5, title: "Grupo 5: Palabras 401 a 500", words: [] },
+  { id: 6, title: "Grupo 6: Palabras 501 a 600", words: [] },
+  { id: 7, title: "Grupo 7: Palabras 601 a 700", words: [] },
+  { id: 8, title: "Grupo 8: Palabras 701 a 800", words: [] },
+  { id: 9, title: "Grupo 9: Palabras 801 a 900", words: [] },
+  { id: 10, title: "Grupo 10: Palabras 901 a 1000", words: [] }
+];
+
 let currentGroupId = 1;
 let unlockedGroups = JSON.parse(localStorage.getItem('unlockedGroups') || '[1]');
 let userAnswers = {};
 
-// --- INITIALIZATION ---
-function initApp() {
+function init() {
   renderGroupPills();
-  loadGroup(currentGroupId);
-  updateProgressBar();
+  renderWords(group1Words);
+  setupQuiz();
 }
 
 function renderGroupPills() {
-  const grid = document.getElementById('groups-grid');
-  grid.innerHTML = '';
-  
+  const container = document.getElementById('groups-grid');
+  container.innerHTML = '';
   courseData.forEach(g => {
     const isUnlocked = unlockedGroups.includes(g.id);
     const pill = document.createElement('div');
     pill.className = `group-pill ${g.id === currentGroupId ? 'active' : ''} ${!isUnlocked ? 'locked' : ''}`;
     pill.onclick = () => { if (isUnlocked) selectGroup(g.id); };
-    
     pill.innerHTML = `
       <div class="badge">${isUnlocked ? `Grupo ${g.id}` : '🔒 Bloqueado'}</div>
-      <div class="status">${isUnlocked ? (unlockedGroups.includes(g.id + 1) ? '✓ Completado' : 'En Curso') : 'Supera grupo ' + (g.id - 1)}</div>
+      <div class="status">${isUnlocked ? '100 palabras' : 'Pasa G' + (g.id - 1)}</div>
     `;
-    grid.appendChild(pill);
+    container.appendChild(pill);
   });
 }
 
 function selectGroup(id) {
   currentGroupId = id;
   renderGroupPills();
-  loadGroup(id);
+  if (id === 1) {
+    renderWords(group1Words);
+    setupQuiz();
+  } else {
+    document.getElementById('words-container').innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: var(--text-muted); padding: 40px;">Cargando palabras del Grupo ${id}...</p>`;
+  }
   switchTab('intro');
 }
 
-function loadGroup(id) {
-  const group = courseData.find(g => g.id === id);
-  if (!group) return;
+function renderWords(list) {
+  const container = document.getElementById('words-container');
+  container.innerHTML = '';
+  document.getElementById('word-count-badge').innerText = list.length;
 
-  // Set Intro Tab
-  document.getElementById('intro-title').innerText = group.title;
-  document.getElementById('intro-desc').innerText = group.description;
-  document.getElementById('intro-warnings').innerText = group.warnings;
-
-  // Set Learning Space
-  const wordsContainer = document.getElementById('words-container');
-  wordsContainer.innerHTML = '';
-
-  if (group.words.length === 0) {
-    wordsContainer.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">
-      Próximamente: Las palabras de este grupo se cargarán al superar el grupo anterior.
-    </div>`;
-  } else {
-    group.words.forEach((w, index) => {
-      const card = document.createElement('div');
-      card.className = 'word-card';
-      card.innerHTML = `
-        <div class="word-header">
-          <div>
-            <span class="word-title">${index + 1}. ${w.word}</span>
-            <span class="word-pos">${w.pos}</span>
-          </div>
-          <button class="audio-btn" onclick="speakWord('${w.word}')" title="Escuchar pronunciación">🔊</button>
-        </div>
-        <div class="word-meaning">${w.meaning}</div>
-        <div class="collocation-box"><strong>Pareja clave:</strong> ${w.collocation}</div>
-        <div class="example-sentence">"${w.example}"</div>
-        <div class="example-translation">${w.exTrans}</div>
-      `;
-      wordsContainer.appendChild(card);
-    });
-  }
-
-  // Set Verification Quiz
-  setupQuiz(group);
+  list.forEach((w, idx) => {
+    const card = document.createElement('div');
+    card.className = 'word-card';
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="word-english">${idx + 1}. ${w.w}</span>
+        <button class="audio-btn" onclick="speak('${w.w}')" title="Pronunciar">🔊</button>
+      </div>
+      <div class="word-spanish">➜ ${w.m}</div>
+      <div class="word-example">"${w.ex}"</div>
+    `;
+    container.appendChild(card);
+  });
 }
 
-// --- TEXT TO SPEECH (Native Audio) ---
-function speakWord(text) {
+function filterWords() {
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const filtered = group1Words.filter(item => 
+    item.w.toLowerCase().includes(query) || item.m.toLowerCase().includes(query)
+  );
+  renderWords(filtered);
+}
+
+function speak(text) {
   if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    window.speechSynthesis.speak(utterance);
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = 0.85;
+    window.speechSynthesis.speak(utter);
   }
 }
 
-// --- QUIZ GENERATOR & LOGIC ---
-function setupQuiz(group) {
+// Genera un examen aleatorio de 10 preguntas tomado de las 100 palabras
+let quizQuestions = [];
+function setupQuiz() {
   const container = document.getElementById('quiz-container');
   container.innerHTML = '';
-  document.getElementById('quiz-result').style.display = 'none';
   userAnswers = {};
+  document.getElementById('quiz-result').style.display = 'none';
 
-  if (group.words.length === 0) {
-    container.innerHTML = `<p style="color: var(--text-muted);">Completa primero el grupo anterior.</p>`;
-    document.getElementById('submit-quiz-btn').style.display = 'none';
-    return;
-  }
-  document.getElementById('submit-quiz-btn').style.display = 'block';
+  // Barajar y tomar 10 palabras aleatorias de las 100
+  const shuffled = [...group1Words].sort(() => 0.5 - Math.random()).slice(0, 10);
+  quizQuestions = shuffled;
 
-  // Generate 10 test questions based on the words
-  const questions = group.words.slice(0, 10).map((w, idx) => {
-    // Generate 3 distractors
-    const distractors = group.words.filter(item => item.word !== w.word)
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3)
-      .map(item => item.meaning);
-    
-    const options = [...distractors, w.meaning].sort(() => 0.5 - Math.random());
-    return { id: idx, word: w.word, correct: w.meaning, options: options, example: w.example.replace(new RegExp(w.word, 'gi'), '_____') };
-  });
+  shuffled.forEach((q, idx) => {
+    // 3 distractores al azar
+    const others = group1Words.filter(x => x.w !== q.w).sort(() => 0.5 - Math.random()).slice(0, 3).map(x => x.m);
+    const options = [...others, q.m].sort(() => 0.5 - Math.random());
 
-  questions.forEach((q, qIndex) => {
-    const qDiv = document.createElement('div');
-    qDiv.className = 'quiz-card';
-    qDiv.innerHTML = `
-      <div class="quiz-q">${qIndex + 1}. ¿Qué significa la palabra <strong>"${q.word}"</strong>? <br><small style="color: var(--text-muted); font-weight: normal;">En contexto: "${q.example}"</small></div>
+    const div = document.createElement('div');
+    div.className = 'quiz-card';
+    div.innerHTML = `
+      <div class="quiz-q">${idx + 1}. ¿Qué significa <strong>"${q.w}"</strong> en español? <br><small style="color: var(--text-muted); font-weight: normal;">Ejemplo: "${q.ex}"</small></div>
       <div class="options-grid">
-        ${q.options.map(opt => `
-          <button type="button" class="option-btn" onclick="selectOption(${q.id}, '${opt.replace(/'/g, "\\'")}', this)">
+        ${options.map(opt => `
+          <button type="button" class="option-btn" onclick="selectOpt(${idx}, '${opt.replace(/'/g, "\\'")}', this)">
             ${opt}
           </button>
         `).join('')}
       </div>
     `;
-    container.appendChild(qDiv);
+    container.appendChild(div);
   });
 }
 
-function selectOption(qId, val, btn) {
-  userAnswers[qId] = val;
+function selectOpt(qIdx, val, btn) {
+  userAnswers[qIdx] = val;
   const parent = btn.parentElement;
   parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
 }
 
 function evaluateQuiz() {
-  const group = courseData.find(g => g.id === currentGroupId);
-  const words = group.words.slice(0, 10);
-  let correctCount = 0;
-
-  words.forEach((w, idx) => {
-    if (userAnswers[idx] === w.meaning) {
-      correctCount++;
-    }
+  let correct = 0;
+  quizQuestions.forEach((q, idx) => {
+    if (userAnswers[idx] === q.m) correct++;
   });
 
-  const percentage = Math.round((correctCount / words.length) * 100);
+  const percentage = Math.round((correct / quizQuestions.length) * 100);
   const resultDiv = document.getElementById('quiz-result');
   resultDiv.style.display = 'block';
 
   if (percentage >= 90) {
     resultDiv.className = 'result-banner pass';
     resultDiv.innerHTML = `
-      <h3>🎉 ¡Excelente! Aprobaste con ${percentage}% (${correctCount}/${words.length})</h3>
-      <p>Has dominado el Grupo ${currentGroupId}. ¡El siguiente grupo ha quedado desbloqueado!</p>
+      <h3>🎉 ¡Aprobaste con ${percentage}%! (${correct}/${quizQuestions.length})</h3>
+      <p>Has superado la verificación del Grupo 1. ¡Grupo 2 desbloqueado!</p>
     `;
-    // Unlock next group
-    if (!unlockedGroups.includes(currentGroupId + 1) && currentGroupId < 10) {
-      unlockedGroups.push(currentGroupId + 1);
+    if (!unlockedGroups.includes(2)) {
+      unlockedGroups.push(2);
       localStorage.setItem('unlockedGroups', JSON.stringify(unlockedGroups));
       renderGroupPills();
-      updateProgressBar();
     }
   } else {
     resultDiv.className = 'result-banner fail';
     resultDiv.innerHTML = `
-      <h3>Puntaje obtenido: ${percentage}% (${correctCount}/${words.length})</h3>
-      <p>Necesitas al menos 90% para desbloquear el siguiente grupo. Revisa el Espacio de Aprendizaje e inténtalo de nuevo.</p>
+      <h3>Obtuviste ${percentage}% (${correct}/${quizQuestions.length})</h3>
+      <p>Necesitas al menos 90% (9 de 10) para aprobar. Revisa el Espacio de Aprendizaje y reintenta.</p>
     `;
   }
 }
 
-// --- TABS & NAVIGATION ---
-function switchTab(tabName) {
+function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-  
-  if (tabName === 'intro') {
+
+  if (tab === 'intro') {
     document.querySelectorAll('.tab-btn')[0].classList.add('active');
     document.getElementById('tab-intro').style.display = 'block';
-  } else if (tabName === 'learn') {
+  } else if (tab === 'learn') {
     document.querySelectorAll('.tab-btn')[1].classList.add('active');
     document.getElementById('tab-learn').style.display = 'block';
-  } else if (tabName === 'quiz') {
+  } else if (tab === 'quiz') {
     document.querySelectorAll('.tab-btn')[2].classList.add('active');
     document.getElementById('tab-quiz').style.display = 'block';
   }
 }
 
-function updateProgressBar() {
-  const percent = (unlockedGroups.length / 10) * 100;
-  document.getElementById('global-progress').style.width = percent + '%';
-}
-
-// Start
-initApp();
+init();
 </script>
 </body>
 </html>
