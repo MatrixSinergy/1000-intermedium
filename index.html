@@ -3,273 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mastery English - 1,000 Palabras Intermedias</title>
+    <title>Vocabulary Mastery - B1/B2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #e0e7ff;
-            --success: #10b981;
-            --success-light: #d1fae5;
-            --danger: #ef4444;
-            --danger-light: #fee2e2;
-            --warning: #f59e0b;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius-lg: 20px;
-            --radius-md: 12px;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.03);
-            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.06), 0 8px 10px -6px rgba(0,0,0,0.04);
-            --shadow-lg: 0 20px 30px -10px rgba(99, 102, 241, 0.15);
+            --bg: #070913;
+            --surface-glass: rgba(18, 22, 38, 0.65);
+            --surface-glass-card: rgba(22, 27, 46, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --border-glass-focus: rgba(236, 72, 153, 0.5);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-pink: #ec4899;
+            --accent-rose: #f43f5e;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --radius-pill: 9999px;
+            --radius-panel: 24px;
+            --radius-card: 16px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); color: var(--text-main); padding: 24px 16px; min-height: 100vh; display: flex; justify-content: center; }
-        .container { max-width: 900px; width: 100%; }
-
-        /* Header */
-        header { text-align: center; margin-bottom: 30px; }
-        .logo-badge {
-            display: inline-flex; align-items: center; gap: 8px; background: var(--primary-light);
-            color: var(--primary-dark); padding: 6px 16px; border-radius: 30px; font-weight: 700;
-            font-size: 0.85rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
         }
-        header h1 { font-size: 2.2rem; font-weight: 800; color: #1e1b4b; margin-bottom: 8px; }
-        header p { color: var(--text-muted); font-size: 1rem; }
 
-        /* Views */
+        /* --- AURORA GLOW BACKGROUND --- */
+        .aurora-container {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; pointer-events: none; overflow: hidden;
+        }
+        .aurora-orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.45;
+        }
+        .orb-1 { width: 550px; height: 550px; background: radial-gradient(circle, #ec4899 0%, transparent 70%); top: -150px; left: -100px; }
+        .orb-2 { width: 650px; height: 650px; background: radial-gradient(circle, #3b82f6 0%, transparent 70%); bottom: -200px; right: -150px; }
+        .orb-3 { width: 450px; height: 450px; background: radial-gradient(circle, #06b6d4 0%, transparent 70%); top: 35%; right: 5%; opacity: 0.25; }
+
+        .app-shell { max-width: 1040px; width: 100%; position: relative; z-index: 1; }
+
+        /* --- NAVIGATION & HEADER --- */
+        header { margin-bottom: 30px; }
+        .nav-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--surface-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass); border-radius: var(--radius-pill);
+            padding: 12px 24px; margin-bottom: 25px;
+        }
+        .brand { font-size: 0.95rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; }
+        .brand span { color: var(--accent-pink); }
+        .nav-links { display: flex; gap: 20px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+        .nav-link { cursor: pointer; transition: color 0.2s; }
+        .nav-link:hover, .nav-link.active { color: #fff; }
+
+        /* --- STATS PANEL --- */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px;
+        }
+        .stat-card {
+            background: var(--surface-glass); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glass); border-radius: var(--radius-card); padding: 18px 22px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; }
+        .stat-value { font-size: 1.7rem; font-weight: 800; color: #fff; }
+        .stat-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+        /* --- MAIN VIEWS --- */
         .view { display: none; }
-        .view.active { display: block; animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .view.active { display: block; animation: viewIn 0.3s ease-out; }
+        @keyframes viewIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Dashboard Grid */
-        .grid-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
-        .group-card {
-            background: var(--card-bg); border-radius: var(--radius-lg); padding: 22px;
-            border: 2px solid var(--border); box-shadow: var(--shadow-sm); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .group-card.unlocked:hover {
-            border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-lg);
-        }
-        .group-card.locked { opacity: 0.6; background: #f1f5f9; border-color: transparent; }
-        .group-card .group-number { font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 4px; }
-        .group-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
-        .group-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; }
-
+        /* --- BUTTONS --- */
         .btn {
-            background: var(--primary); color: white; border: none; padding: 12px 18px;
-            border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; cursor: pointer;
-            transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.08); color: #fff; border: 1px solid var(--border-glass);
+            padding: 12px 22px; border-radius: var(--radius-pill); font-size: 0.88rem; font-weight: 700;
+            cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
         }
-        .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
-        .btn-secondary { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); }
-        .btn-secondary:hover { background: #e2e8f0; }
-        .btn-danger { background: var(--danger-light); color: var(--danger); }
-        .btn-danger:hover { background: #fecaca; }
-        .btn-success { background: var(--success); color: white; }
-        .btn-success:hover { background: #059669; }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .btn:hover { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-1px); }
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-rose) 0%, var(--accent-pink) 100%);
+            border: none; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.35);
+        }
+        .btn-primary:hover { box-shadow: 0 6px 28px rgba(236, 72, 153, 0.5); transform: translateY(-1px); }
+        .btn-emerald { background: var(--accent-emerald); border: none; }
+        .btn-emerald:hover { background: #059669; }
+        .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
-        .badge-status {
-            position: absolute; top: 12px; right: 12px; font-size: 0.75rem; font-weight: 800;
-            padding: 4px 10px; border-radius: 20px;
+        /* --- DASHBOARD / GROUPS GRID --- */
+        .groups-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px;
         }
-        .badge-completed { background: var(--success-light); color: var(--success); }
-        .badge-locked { background: #e2e8f0; color: var(--text-muted); }
+        .glass-group {
+            background: var(--surface-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass); border-radius: var(--radius-panel); padding: 24px;
+            display: flex; flex-direction: column; justify-content: space-between; transition: all 0.25s; position: relative;
+        }
+        .glass-group.unlocked:hover {
+            border-color: rgba(236, 72, 153, 0.4); transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+        .glass-group.locked { opacity: 0.45; background: rgba(12, 15, 26, 0.6); }
+        .group-tag { font-size: 0.72rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--accent-pink); margin-bottom: 6px; }
+        .glass-group h3 { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+        .glass-group p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; }
+        .status-badge {
+            position: absolute; top: 16px; right: 16px; font-size: 0.7rem; font-weight: 700;
+            padding: 4px 10px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-glass); color: var(--text-muted);
+        }
+        .status-badge.completed { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
 
-        /* --- STUDY MODE (3D Interactive Flip Card) --- */
-        .study-bar {
-            background: var(--card-bg); border-radius: var(--radius-md); padding: 14px 20px;
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-            border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+        /* --- STUDY MODE (3D GLASS CARD) --- */
+        .glass-workspace {
+            background: var(--surface-glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border-glass); border-radius: var(--radius-panel); padding: 32px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
         }
-        .session-progress { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); }
-        .session-progress span { color: var(--primary); font-size: 1.1rem; }
+        .workspace-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
 
-        .flashcard-wrapper {
-            perspective: 1000px; margin-bottom: 20px; cursor: pointer;
-        }
-        .flashcard-3d {
-            width: 100%; min-height: 280px; position: relative; transform-style: preserve-3d;
+        .card-stage { perspective: 1000px; margin-bottom: 24px; cursor: pointer; }
+        .card-inner {
+            width: 100%; min-height: 290px; position: relative; transform-style: preserve-3d;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            background: transparent;
         }
-        .flashcard-3d.flipped { transform: rotateY(180deg); }
-
+        .card-inner.flipped { transform: rotateY(180deg); }
         .card-face {
             position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
-            border-radius: var(--radius-lg); background: var(--card-bg); border: 2px solid var(--border);
-            box-shadow: var(--shadow-md); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; padding: 30px; text-align: center;
+            border-radius: var(--radius-panel); background: var(--surface-glass-card);
+            border: 1px solid var(--border-glass); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 30px; text-align: center;
         }
-        .card-face-back {
-            transform: rotateY(180deg); background: #fcfdff; border-color: #c7d2fe;
-        }
+        .card-face-back { transform: rotateY(180deg); border-color: rgba(236, 72, 153, 0.3); }
 
-        .card-tag {
-            font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; color: var(--text-muted);
-            text-transform: uppercase; margin-bottom: 12px;
-        }
-        .word-en { font-size: 2.8rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px; }
-        .word-es { font-size: 2.2rem; font-weight: 800; color: var(--success); }
-        .tap-hint { font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; }
+        .card-indicator { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; font-weight: 700; }
+        .display-en { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
+        .display-es { font-size: 2.3rem; font-weight: 800; color: var(--accent-pink); margin-bottom: 12px; }
+        .cue-text { font-size: 0.8rem; color: var(--text-muted); margin-top: 14px; }
 
-        .audio-pill {
-            background: var(--primary-light); color: var(--primary-dark); border: none;
-            padding: 8px 16px; border-radius: 30px; font-weight: 700; font-size: 0.9rem;
-            cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s;
-            margin-top: 10px;
+        /* Interactive Spell / Verification bar */
+        .spell-strip {
+            background: rgba(12, 15, 26, 0.6); border: 1px solid var(--border-glass);
+            border-radius: var(--radius-card); padding: 16px; margin-bottom: 20px;
         }
-        .audio-pill:hover { background: #c7d2fe; }
-
-        /* Interactive Spell/Type Practice Bar */
-        .practice-box {
-            background: var(--card-bg); border-radius: var(--radius-md); padding: 18px;
-            border: 1px solid var(--border); margin-bottom: 20px; box-shadow: var(--shadow-sm);
-        }
-        .practice-title { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
-        .input-row { display: flex; gap: 10px; }
+        .spell-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; margin-bottom: 10px; }
+        .spell-row { display: flex; gap: 12px; }
         .spell-input {
-            flex: 1; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-md);
-            font-size: 1.05rem; font-weight: 600; outline: none; transition: 0.2s;
+            flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass);
+            border-radius: var(--radius-pill); padding: 12px 20px; color: #fff; font-size: 1rem;
+            outline: none; transition: border-color 0.2s;
         }
-        .spell-input:focus { border-color: var(--primary); }
-        .spell-input.success { border-color: var(--success); background: #f0fdf4; color: #166534; }
-        .spell-input.error { border-color: var(--danger); background: #fef2f2; color: #991b1b; }
+        .spell-input:focus { border-color: var(--accent-pink); }
+        .spell-input.correct { border-color: var(--accent-emerald); background: rgba(16, 185, 129, 0.1); }
+        .spell-input.wrong { border-color: var(--accent-rose); background: rgba(244, 63, 94, 0.1); }
 
-        /* Action Buttons */
         .study-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .btn-rate { padding: 16px; font-size: 1rem; border-radius: var(--radius-md); }
 
         /* --- EXAM MODE --- */
-        .exam-panel {
-            background: var(--card-bg); border-radius: var(--radius-lg); padding: 30px;
-            border: 1px solid var(--border); box-shadow: var(--shadow-md);
-        }
-        .exam-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .meter { width: 100%; height: 8px; background: #e2e8f0; border-radius: 20px; overflow: hidden; margin-bottom: 25px; }
-        .meter-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
-        .exam-question { font-size: 1.4rem; font-weight: 800; text-align: center; margin-bottom: 25px; }
+        .exam-progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: var(--radius-pill); overflow: hidden; margin-bottom: 28px; }
+        .exam-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-rose), var(--accent-pink)); width: 0%; transition: width 0.3s; }
+        .exam-stem { font-size: 1.5rem; font-weight: 800; text-align: center; color: #fff; margin-bottom: 28px; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
         .opt-btn {
-            background: white; border: 2px solid var(--border); padding: 16px; border-radius: var(--radius-md);
-            font-size: 1.05rem; font-weight: 600; text-align: left; cursor: pointer; transition: 0.2s;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-glass);
+            border-radius: var(--radius-card); padding: 18px 20px; font-size: 1rem; color: #fff;
+            text-align: left; cursor: pointer; transition: all 0.2s; font-weight: 600;
         }
-        .opt-btn:hover { border-color: var(--primary); background: #f8fafc; }
-        .opt-btn.correct { background: #dcfce7; border-color: var(--success); color: #15803d; }
-        .opt-btn.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; }
+        .opt-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-pink); }
+        .opt-btn.correct { background: rgba(16, 185, 129, 0.2); border-color: var(--accent-emerald); color: #34d399; }
+        .opt-btn.wrong { background: rgba(244, 63, 94, 0.2); border-color: var(--accent-rose); color: #f87171; }
 
-        /* Results Screen */
+        /* --- RESULTS VIEW --- */
         .results-box { text-align: center; padding: 40px 20px; }
-        .score-dial {
+        .score-circle {
             width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 24px;
-            display: flex; align-items: center; justify-content: center; font-size: 2.2rem;
-            font-weight: 800; border: 10px solid;
+            display: flex; align-items: center; justify-content: center; font-size: 2.3rem;
+            font-weight: 800; border: 6px solid;
         }
-        .score-dial.pass { border-color: var(--success); color: var(--success); background: #f0fdf4; }
-        .score-dial.fail { border-color: var(--danger); color: var(--danger); background: #fef2f2; }
+        .score-circle.pass { border-color: var(--accent-emerald); color: var(--accent-emerald); background: rgba(16, 185, 129, 0.05); }
+        .score-circle.fail { border-color: var(--accent-rose); color: var(--accent-rose); background: rgba(244, 63, 94, 0.05); }
 
-        @media (max-width: 640px) {
+        /* SVG helper */
+        .icon { width: 18px; height: 18px; fill: currentColor; }
+
+        @media (max-width: 680px) {
+            .stats-grid { grid-template-columns: 1fr; }
             .options-grid { grid-template-columns: 1fr; }
-            .word-en { font-size: 2.2rem; }
-            .word-es { font-size: 1.8rem; }
             .study-actions { grid-template-columns: 1fr; }
+            .display-en { font-size: 2.2rem; }
+            .display-es { font-size: 1.8rem; }
+            .nav-bar { flex-direction: column; gap: 12px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<!-- AURORA GLOW BACKGROUND -->
+<div class="aurora-container">
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+</div>
+
+<div class="app-shell">
+    <!-- NAVIGATION BAR -->
     <header>
-        <div class="logo-badge">🇬🇧 Nivel Intermedio B1 - B2</div>
-        <h1>Mastery English 1,000</h1>
-        <p>10 Grupos de 100 palabras con práctica de pronunciación, ortografía y examen</p>
+        <div class="nav-bar">
+            <div class="brand">MASTER<span>VOCAB</span> B1-B2</div>
+            <div class="nav-links">
+                <span class="nav-link active" onclick="showDashboard()">Modulos</span>
+                <span class="nav-link" onclick="resetStatsConfirmation()">Reiniciar Metricas</span>
+            </div>
+        </div>
+
+        <!-- LEARNING STATISTICS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Aprendidas</div>
+                <div class="stat-value" id="stat-total-learned">0 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ 1000</span></div>
+                <div class="stat-sub" id="stat-pct">0% del vocabulario</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Conocidas al Instante</div>
+                <div class="stat-value" id="stat-known-first" style="color: var(--accent-cyan);">0</div>
+                <div class="stat-sub">Dominadas sin reintentos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Palabras Repasadas</div>
+                <div class="stat-value" id="stat-reviewed" style="color: var(--accent-pink);">0</div>
+                <div class="stat-sub">Reforzadas en repeticion</div>
+            </div>
+        </div>
     </header>
 
-    <!-- 1. DASHBOARD -->
+    <!-- 1. DASHBOARD DE GRUPOS -->
     <div id="dashboard" class="view active">
-        <div class="grid-groups" id="groups-container"></div>
+        <div class="groups-grid" id="groups-container"></div>
     </div>
 
-    <!-- 2. REPASO / MODO ESTUDIO INTERACTIVO -->
+    <!-- 2. WORKSPACE DE ESTUDIO INTERACTIVO -->
     <div id="study-view" class="view">
-        <div class="study-bar">
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 0.85rem;" onclick="showDashboard()">← Menú</button>
-            <div class="session-progress">Dominadas en este repaso: <span id="mastered-count">0</span> / 100</div>
-        </div>
-
-        <!-- 3D FLIP CARD -->
-        <div class="flashcard-wrapper" onclick="toggleCardFlip()">
-            <div class="flashcard-3d" id="study-card">
-                <!-- Front (Inglés) -->
-                <div class="card-face card-face-front">
-                    <span class="card-tag">Inglés (Toca para girar)</span>
-                    <h2 class="word-en" id="card-en">Word</h2>
-                    <button class="audio-pill" onclick="event.stopPropagation(); playVoice();">
-                        🔊 Escuchar Pronunciación
-                    </button>
-                    <span class="tap-hint">🔄 Haz clic para ver significado en español</span>
-                </div>
-                <!-- Back (Español) -->
-                <div class="card-face card-face-back">
-                    <span class="card-tag">Español</span>
-                    <h2 class="word-es" id="card-es">Traducción</h2>
-                    <button class="audio-pill" onclick="event.stopPropagation(); playVoice();">
-                        🔊 Repetir Pronunciación
-                    </button>
-                    <span class="tap-hint">🔄 Haz clic para regresar al inglés</span>
+        <div class="glass-workspace">
+            <div class="workspace-top">
+                <button class="btn" onclick="showDashboard()">Volver a Modulos</button>
+                <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+                    Dominadas en esta sesion: <span id="session-counter" style="color: #fff;">0</span> / 100
                 </div>
             </div>
-        </div>
 
-        <!-- MINI-RETO: ESCRIBE Y COMPRUEBA -->
-        <div class="practice-box">
-            <div class="practice-title">✍️ Reto de Memoria: Escribe la palabra en inglés</div>
-            <div class="input-row">
-                <input type="text" id="spell-input" class="spell-input" placeholder="Escribe aquí en inglés..." autocomplete="off" onkeyup="checkSpelling(event)">
-                <button class="btn btn-secondary" onclick="checkSpellingManual()">Comprobar</button>
+            <!-- 3D GLASS FLASHCARD -->
+            <div class="card-stage" onclick="toggleFlip()">
+                <div class="card-inner" id="card-inner">
+                    <!-- Frente (Ingles) -->
+                    <div class="card-face">
+                        <div class="card-indicator">Ingles - Clic para voltear</div>
+                        <div class="display-en" id="word-en">Word</div>
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); triggerAudio();">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                            Pronunciacion
+                        </button>
+                        <div class="cue-text">Haz clic en la tarjeta para ver la traduccion</div>
+                    </div>
+                    <!-- Reverso (Espanol) -->
+                    <div class="card-face card-face-back">
+                        <div class="card-indicator">Espanol</div>
+                        <div class="display-es" id="word-es">Traduccion</div>
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); triggerAudio();">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                            Repetir Audio
+                        </button>
+                        <div class="cue-text">Haz clic para regresar al ingles</div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- BOTONES DE EVALUACIÓN ACTIVA -->
-        <div class="study-actions">
-            <button class="btn btn-danger btn-rate" onclick="markHard()">
-                🔁 Aún me cuesta (Repetir luego)
-            </button>
-            <button class="btn btn-success btn-rate" onclick="markMastered()">
-                ✅ ¡Me la sé! (Siguiente)
-            </button>
+            <!-- COMPROBACION DE ESCRITURA -->
+            <div class="spell-strip">
+                <div class="spell-label">Validacion Activa: Escribe la palabra en ingles</div>
+                <div class="spell-row">
+                    <input type="text" id="spell-input" class="spell-input" placeholder="Escribe aqui..." autocomplete="off" onkeyup="handleSpellKey(event)">
+                    <button class="btn" onclick="validateSpelling()">Comprobar</button>
+                </div>
+            </div>
+
+            <!-- EVALUACION DE APRENDIZAJE -->
+            <div class="study-actions">
+                <button class="btn" style="border-color: rgba(244, 63, 94, 0.4);" onclick="handleActionHard()">
+                    Aun me cuesta (Repasar despues)
+                </button>
+                <button class="btn btn-emerald" onclick="handleActionMastered()">
+                    Dominada (Continuar)
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- 3. MODO EXAMEN -->
     <div id="exam-view" class="view">
-        <div class="exam-panel">
-            <div class="exam-header">
-                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="showDashboard()">Abandonar Examen</button>
-                <span id="exam-counter" style="font-weight: 700; color: var(--text-muted);">Pregunta 1 de 10</span>
+        <div class="glass-workspace">
+            <div class="workspace-top">
+                <button class="btn" onclick="showDashboard()">Cancelar Examen</button>
+                <div id="exam-counter" style="font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">Pregunta 1 de 15</div>
             </div>
-            <div class="meter"><div class="meter-fill" id="exam-progress"></div></div>
-            <div class="exam-question" id="exam-q">¿Cuál es la traducción de: "..."?</div>
+            <div class="exam-progress-bar"><div class="exam-progress-fill" id="exam-progress"></div></div>
+            <div class="exam-stem" id="exam-question">Significado de: "..."</div>
             <div class="options-grid" id="exam-options"></div>
         </div>
     </div>
 
     <!-- 4. PANTALLA RESULTADOS -->
     <div id="results-view" class="view">
-        <div class="exam-panel results-box">
-            <h2 id="result-title" style="font-size: 2rem; margin-bottom: 10px;">Resultado</h2>
-            <div class="score-dial" id="result-score">0%</div>
-            <p id="result-message" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;"></p>
+        <div class="glass-workspace results-box">
+            <h2 id="result-title" style="font-size: 1.8rem; margin-bottom: 12px; color: #fff;">Resultado del Examen</h2>
+            <div class="score-circle" id="result-score">0%</div>
+            <p id="result-message" style="color: var(--text-muted); font-size: 1rem; margin-bottom: 25px;"></p>
             <div style="display: flex; gap: 12px; justify-content: center;">
-                <button class="btn btn-secondary" onclick="showDashboard()">Volver al Menú</button>
-                <button class="btn" id="retry-exam-btn" onclick="startExam(currentGroup)">Repetir Examen</button>
+                <button class="btn" onclick="showDashboard()">Ir a Modulos</button>
+                <button class="btn btn-primary" onclick="startExam(currentGroup)">Reintentar Examen</button>
             </div>
         </div>
     </div>
@@ -277,7 +337,7 @@
 
 <script>
     // ==========================================
-    // 1. BASE DE DATOS (1,000 PALABRAS INTERMEDIAS)
+    // 1. DICCIONARIO BASE (1,000 PALABRAS B1/B2)
     // ==========================================
     const rawString = `
 happiness|felicidad
@@ -1248,7 +1308,7 @@ contain|contener
 continue|continuar
     `;
 
-    // Procesar datos de forma robusta
+    // Procesamiento seguro
     const rawWords = rawString
         .split('\n')
         .map(line => line.trim())
@@ -1258,25 +1318,55 @@ continue|continuar
             return { en: en.trim(), es: es.trim() };
         });
 
-    // Dividir en 10 grupos de 100 palabras
     const groups = [];
     for (let i = 0; i < 10; i++) {
         groups.push(rawWords.slice(i * 100, (i + 1) * 100));
     }
 
     // ==========================================
-    // 2. ESTADO Y CONTROL
+    // 2. SISTEMA DE ESTADISTICAS PERSISTENTE
+    // ==========================================
+    // Registra: { [enWord]: { mastered: bool, knownDirectly: bool, reviewed: bool } }
+    let wordStats = JSON.parse(localStorage.getItem('vocabWordStats')) || {};
+    let progress = JSON.parse(localStorage.getItem('englishProgress')) || { unlocked: 1 };
+
+    function updateStatsDisplay() {
+        let totalLearned = 0;
+        let knownFirst = 0;
+        let reviewedCount = 0;
+
+        Object.values(wordStats).forEach(s => {
+            if (s.mastered) totalLearned++;
+            if (s.knownDirectly) knownFirst++;
+            if (s.reviewed) reviewedCount++;
+        });
+
+        document.getElementById('stat-total-learned').innerHTML = `${totalLearned} <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ 1000</span>`;
+        document.getElementById('stat-known-first').innerText = knownFirst;
+        document.getElementById('stat-reviewed').innerText = reviewedCount;
+        
+        const pct = ((totalLearned / 1000) * 100).toFixed(1);
+        document.getElementById('stat-pct').innerText = `${pct}% del vocabulario`;
+    }
+
+    function resetStatsConfirmation() {
+        if (confirm("Deseas reiniciar todas tus estadisticas y progreso a cero?")) {
+            localStorage.removeItem('vocabWordStats');
+            localStorage.removeItem('englishProgress');
+            wordStats = {};
+            progress = { unlocked: 1 };
+            updateStatsDisplay();
+            renderDashboard();
+        }
+    }
+
+    // ==========================================
+    // 3. NAVEGACION Y VISTAS
     // ==========================================
     let currentGroup = 0;
     let studyQueue = [];
-    let masteredCount = 0;
-    let currentStudyWord = null;
-
-    let examQuestions = [];
-    let currentExamIdx = 0;
-    let examScore = 0;
-
-    let progress = JSON.parse(localStorage.getItem('englishProgress')) || { unlocked: 1 };
+    let sessionMastered = 0;
+    let currentWord = null;
 
     const views = {
         dashboard: document.getElementById('dashboard'),
@@ -1285,15 +1375,16 @@ continue|continuar
         results: document.getElementById('results-view')
     };
 
-    function switchView(viewName) {
+    function switchView(name) {
         Object.values(views).forEach(v => v.classList.remove('active'));
-        views[viewName].classList.add('active');
+        views[name].classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showDashboard() {
         switchView('dashboard');
         renderDashboard();
+        updateStatsDisplay();
     }
 
     function renderDashboard() {
@@ -1305,21 +1396,21 @@ continue|continuar
             const isCompleted = (i + 1) < progress.unlocked;
 
             const card = document.createElement('div');
-            card.className = `group-card ${isUnlocked ? 'unlocked' : 'locked'}`;
-
+            card.className = `glass-group ${isUnlocked ? 'unlocked' : 'locked'}`;
+            
             card.innerHTML = `
-                ${isCompleted ? '<span class="badge-status badge-completed">✓ Completado</span>' : (!isUnlocked ? '<span class="badge-status badge-locked">🔒 Bloqueado</span>' : '')}
+                ${isCompleted ? '<span class="status-badge completed">Completado</span>' : (!isUnlocked ? '<span class="status-badge">Bloqueado</span>' : '')}
                 <div>
-                    <div class="group-number">Módulo ${i + 1}</div>
+                    <div class="group-tag">Modulo ${i + 1}</div>
                     <h3>Grupo ${i + 1}</h3>
-                    <p>${isUnlocked ? '100 palabras clave' : 'Aprueba el grupo ' + i}</p>
+                    <p>${isUnlocked ? '100 palabras seleccionadas' : 'Requiere modulo ' + i}</p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <button class="btn btn-secondary" ${!isUnlocked ? 'disabled' : ''} onclick="startStudy(${i})">
-                        ⚡ Estudiar y Practicar
+                    <button class="btn btn-primary" ${!isUnlocked ? 'disabled' : ''} onclick="startStudy(${i})">
+                        Estudiar y Repasar
                     </button>
                     <button class="btn" ${!isUnlocked ? 'disabled' : ''} onclick="startExam(${i})">
-                        📝 Examen de Paso
+                        Examen de Paso
                     </button>
                 </div>
             `;
@@ -1328,126 +1419,137 @@ continue|continuar
     }
 
     // ==========================================
-    // 3. MODO ESTUDIO INTERACTIVO (3D + SPELLING + QUEUE)
+    // 4. MODO ESTUDIO INTERACTIVO (FLASHCARD 3D)
     // ==========================================
-    function startStudy(groupIndex) {
-        currentGroup = groupIndex;
-        // Creamos una cola con las 100 palabras del grupo
-        studyQueue = [...groups[groupIndex]];
-        masteredCount = 0;
+    function startStudy(groupIdx) {
+        currentGroup = groupIdx;
+        studyQueue = [...groups[groupIdx]];
+        sessionMastered = 0;
         switchView('study');
-        nextCard();
+        renderNextCard();
     }
 
-    function nextCard() {
+    function renderNextCard() {
         if (studyQueue.length === 0) {
-            alert("🎉 ¡Felicidades! Has repasado y dominado las 100 palabras de este grupo.");
+            alert("Modulo de repaso finalizado exitosamente.");
             showDashboard();
             return;
         }
 
-        currentStudyWord = studyQueue[0];
-        
-        // Reset card state
-        const card = document.getElementById('study-card');
-        card.classList.remove('flipped');
+        currentWord = studyQueue[0];
+        document.getElementById('card-inner').classList.remove('flipped');
+        document.getElementById('word-en').innerText = currentWord.en;
+        document.getElementById('word-es').innerText = currentWord.es;
+        document.getElementById('session-counter').innerText = sessionMastered;
 
-        document.getElementById('card-en').innerText = currentStudyWord.en;
-        document.getElementById('card-es').innerText = currentStudyWord.es;
-        document.getElementById('mastered-count').innerText = masteredCount;
-
-        // Reset input de práctica
         const input = document.getElementById('spell-input');
         input.value = '';
         input.className = 'spell-input';
 
-        // Auto pronunciación suave al cargar la nueva palabra
-        setTimeout(() => playVoice(), 200);
+        setTimeout(() => triggerAudio(), 150);
     }
 
-    function toggleCardFlip() {
-        document.getElementById('study-card').classList.toggle('flipped');
+    function toggleFlip() {
+        document.getElementById('card-inner').classList.toggle('flipped');
     }
 
-    function playVoice() {
-        if ('speechSynthesis' in window && currentStudyWord) {
+    function triggerAudio() {
+        if ('speechSynthesis' in window && currentWord) {
             window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(currentStudyWord.en);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.85;
-            window.speechSynthesis.speak(utterance);
+            const utter = new SpeechSynthesisUtterance(currentWord.en);
+            utter.lang = 'en-US';
+            utter.rate = 0.85;
+            window.speechSynthesis.speak(utter);
         }
     }
 
-    // Mini reto de escritura
-    function checkSpelling(e) {
-        if (e.key === 'Enter') {
-            checkSpellingManual();
-        }
+    function handleSpellKey(e) {
+        if (e.key === 'Enter') validateSpelling();
     }
 
-    function checkSpellingManual() {
+    function validateSpelling() {
         const input = document.getElementById('spell-input');
         const typed = input.value.trim().toLowerCase();
-        const expected = currentStudyWord.en.toLowerCase();
+        const target = currentWord.en.toLowerCase();
 
-        if (typed === expected) {
-            input.className = 'spell-input success';
-            playVoice();
-            // Si la escribe bien, voltea la tarjeta automáticamente como recompensa
-            document.getElementById('study-card').classList.add('flipped');
+        if (typed === target) {
+            input.className = 'spell-input correct';
+            triggerAudio();
+            document.getElementById('card-inner').classList.add('flipped');
         } else {
-            input.className = 'spell-input error';
+            input.className = 'spell-input wrong';
         }
     }
 
-    // Evaluación: "Aún me cuesta" -> pasa al final de la cola para volver a salir
-    function markHard() {
+    function handleActionHard() {
         const item = studyQueue.shift();
-        studyQueue.push(item);
-        nextCard();
+        studyQueue.push(item); // Pasa al final para reforzarse
+
+        // Registro de estadistica
+        if (!wordStats[item.en]) {
+            wordStats[item.en] = { mastered: false, knownDirectly: false, reviewed: true };
+        } else {
+            wordStats[item.en].reviewed = true;
+        }
+        localStorage.setItem('vocabWordStats', JSON.stringify(wordStats));
+        updateStatsDisplay();
+
+        renderNextCard();
     }
 
-    // Evaluación: "¡Me la sé!" -> dominada
-    function markMastered() {
-        studyQueue.shift();
-        masteredCount++;
-        nextCard();
+    function handleActionMastered() {
+        const item = studyQueue.shift();
+        sessionMastered++;
+
+        // Si nunca fue marcada como 'reviewed', se cuenta como conocida directo
+        if (!wordStats[item.en]) {
+            wordStats[item.en] = { mastered: true, knownDirectly: true, reviewed: false };
+        } else {
+            wordStats[item.en].mastered = true;
+        }
+        localStorage.setItem('vocabWordStats', JSON.stringify(wordStats));
+        updateStatsDisplay();
+
+        renderNextCard();
     }
 
     // ==========================================
-    // 4. MODO EXAMEN
+    // 5. MODO EXAMEN (PALABRAS ALEATORIAS DEL GRUPO)
     // ==========================================
-    function startExam(groupIndex) {
-        currentGroup = groupIndex;
-        currentExamIdx = 0;
+    let examItems = [];
+    let examCurrent = 0;
+    let examScore = 0;
+
+    function startExam(groupIdx) {
+        currentGroup = groupIdx;
+        examCurrent = 0;
         examScore = 0;
 
-        // Selecciona 10 palabras aleatorias del grupo
-        const shuffled = [...groups[groupIndex]].sort(() => 0.5 - Math.random());
-        examQuestions = shuffled.slice(0, 10).map(word => {
-            const distractors = [...groups[groupIndex]]
-                .filter(w => w.es !== word.es)
+        // Extrae 15 palabras aleatorias del grupo actual
+        const pool = [...groups[groupIdx]].sort(() => 0.5 - Math.random());
+        examItems = pool.slice(0, 15).map(item => {
+            const distractors = [...groups[groupIdx]]
+                .filter(w => w.es !== item.es)
                 .sort(() => 0.5 - Math.random())
                 .slice(0, 3)
                 .map(w => w.es);
 
-            const options = [word.es, ...distractors].sort(() => 0.5 - Math.random());
-            return { en: word.en, correct: word.es, options };
+            const options = [item.es, ...distractors].sort(() => 0.5 - Math.random());
+            return { en: item.en, correct: item.es, options };
         });
 
         switchView('exam');
-        renderExamQuestion();
+        renderExamStep();
     }
 
-    function renderExamQuestion() {
-        const q = examQuestions[currentExamIdx];
-        
-        document.getElementById('exam-counter').innerText = `Pregunta ${currentExamIdx + 1} de ${examQuestions.length}`;
-        const pct = (currentExamIdx / examQuestions.length) * 100;
+    function renderExamStep() {
+        const q = examItems[examCurrent];
+
+        document.getElementById('exam-counter').innerText = `Pregunta ${examCurrent + 1} de ${examItems.length}`;
+        const pct = (examCurrent / examItems.length) * 100;
         document.getElementById('exam-progress').style.width = `${pct}%`;
 
-        document.getElementById('exam-q').innerText = `¿Cuál es el significado de "${q.en}"?`;
+        document.getElementById('exam-question').innerText = `Significado de: "${q.en}"`;
 
         const container = document.getElementById('exam-options');
         container.innerHTML = '';
@@ -1456,73 +1558,64 @@ continue|continuar
             const btn = document.createElement('button');
             btn.className = 'opt-btn';
             btn.innerText = opt;
-            btn.onclick = () => selectExamOption(btn, opt, q.correct);
+            btn.onclick = () => selectExamAnswer(btn, opt, q.correct);
             container.appendChild(btn);
         });
     }
 
-    function selectExamOption(btn, selected, correct) {
-        const allBtns = document.querySelectorAll('.opt-btn');
-        allBtns.forEach(b => b.disabled = true);
+    function selectExamAnswer(btn, chosen, correct) {
+        const all = document.querySelectorAll('.opt-btn');
+        all.forEach(b => b.disabled = true);
 
-        if (selected === correct) {
+        if (chosen === correct) {
             btn.classList.add('correct');
             examScore++;
         } else {
             btn.classList.add('wrong');
-            allBtns.forEach(b => {
+            all.forEach(b => {
                 if (b.innerText === correct) b.classList.add('correct');
             });
         }
 
         setTimeout(() => {
-            currentExamIdx++;
-            if (currentExamIdx < examQuestions.length) {
-                renderExamQuestion();
+            examCurrent++;
+            if (examCurrent < examItems.length) {
+                renderExamStep();
             } else {
-                showExamResults();
+                finishExamEvaluation();
             }
-        }, 900);
+        }, 850);
     }
 
-    function showExamResults() {
+    function finishExamEvaluation() {
         switchView('results');
-        const percentage = Math.round((examScore / examQuestions.length) * 100);
+        const percentage = Math.round((examScore / examItems.length) * 100);
 
-        const scoreEl = document.getElementById('result-score');
+        const scoreCircle = document.getElementById('result-score');
         const titleEl = document.getElementById('result-title');
         const msgEl = document.getElementById('result-message');
 
-        scoreEl.innerText = `${percentage}%`;
+        scoreCircle.innerText = `${percentage}%`;
 
         if (percentage >= 80) {
-            scoreEl.className = 'score-dial pass';
-            titleEl.innerText = "¡Módulo Aprobado! 🎉";
-            msgEl.innerText = `Has obtenido ${examScore} de ${examQuestions.length} aciertos.`;
+            scoreCircle.className = 'score-circle pass';
+            titleEl.innerText = "Modulo Aprobado";
+            msgEl.innerText = `Aciertos: ${examScore} de ${examItems.length}. Has superado el requisito minimo del 80%.`;
 
             if (currentGroup + 1 === progress.unlocked && progress.unlocked < 10) {
                 progress.unlocked++;
                 localStorage.setItem('englishProgress', JSON.stringify(progress));
-                msgEl.innerText += " ¡Has desbloqueado el siguiente grupo!";
+                msgEl.innerText += " Siguiente modulo desbloqueado.";
             }
         } else {
-            scoreEl.className = 'score-dial fail';
-            titleEl.innerText = "Necesitas Repasar 📚";
-            msgEl.innerText = `Obtuviste ${examScore} de ${examQuestions.length} aciertos. Se requiere un 80% mínimo para aprobar.`;
+            scoreCircle.className = 'score-circle fail';
+            titleEl.innerText = "Examen No Superado";
+            msgEl.innerText = `Aciertos: ${examScore} de ${examItems.length}. Se requiere un 80% para validar el modulo.`;
         }
     }
 
-    // Atajos de teclado en el repaso: Espacio para girar, Enter para avanzar si escribió bien
-    document.addEventListener('keydown', (e) => {
-        if (views.study.classList.contains('active')) {
-            if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
-                e.preventDefault();
-                toggleCardFlip();
-            }
-        }
-    });
-
-    // Iniciar
+    // Inicializacion
+    updateStatsDisplay();
     renderDashboard();
 </script>
 </body>
