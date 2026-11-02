@@ -19,6 +19,7 @@
             --accent-rose: #f43f5e;
             --accent-cyan: #06b6d4;
             --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
             --radius-pill: 9999px;
             --radius-panel: 24px;
             --radius-card: 16px;
@@ -52,12 +53,12 @@
         .app-shell { max-width: 1040px; width: 100%; position: relative; z-index: 1; }
 
         /* --- NAVIGATION & HEADER --- */
-        header { margin-bottom: 30px; }
+        header { margin-bottom: 25px; }
         .nav-bar {
             display: flex; justify-content: space-between; align-items: center;
             background: var(--surface-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass); border-radius: var(--radius-pill);
-            padding: 12px 24px; margin-bottom: 25px;
+            padding: 12px 24px; margin-bottom: 22px;
         }
         .brand { font-size: 0.95rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; }
         .brand span { color: var(--accent-pink); }
@@ -67,16 +68,25 @@
 
         /* --- STATS PANEL --- */
         .stats-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 25px;
         }
         .stat-card {
             background: var(--surface-glass); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-glass); border-radius: var(--radius-card); padding: 18px 22px;
+            border: 1px solid var(--border-glass); border-radius: var(--radius-card); padding: 18px 20px;
             display: flex; flex-direction: column; justify-content: center;
         }
-        .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; }
-        .stat-value { font-size: 1.7rem; font-weight: 800; color: #fff; }
-        .stat-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+        .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; }
+        .stat-value { font-size: 1.6rem; font-weight: 800; color: #fff; }
+        .stat-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+        /* --- BANCO CRITICO PROMO PANEL --- */
+        .critical-banner {
+            background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: var(--radius-card); padding: 18px 24px; margin-bottom: 25px;
+            display: flex; justify-content: space-between; align-items: center; gap: 16px;
+        }
+        .critical-title { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+        .critical-desc { font-size: 0.85rem; color: var(--text-muted); }
 
         /* --- MAIN VIEWS --- */
         .view { display: none; }
@@ -96,11 +106,13 @@
             border: none; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.35);
         }
         .btn-primary:hover { box-shadow: 0 6px 28px rgba(236, 72, 153, 0.5); transform: translateY(-1px); }
+        .btn-amber { background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%); border: none; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+        .btn-amber:hover { box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45); }
         .btn-emerald { background: var(--accent-emerald); border: none; }
         .btn-emerald:hover { background: #059669; }
         .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
-        /* --- DASHBOARD / GROUPS GRID --- */
+        /* --- GROUPS GRID --- */
         .groups-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px;
         }
@@ -124,7 +136,7 @@
         }
         .status-badge.completed { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
 
-        /* --- STUDY MODE (3D GLASS CARD) --- */
+        /* --- STUDY WORKSPACE --- */
         .glass-workspace {
             background: var(--surface-glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--border-glass); border-radius: var(--radius-panel); padding: 32px;
@@ -151,7 +163,6 @@
         .display-es { font-size: 2.3rem; font-weight: 800; color: var(--accent-pink); margin-bottom: 12px; }
         .cue-text { font-size: 0.8rem; color: var(--text-muted); margin-top: 14px; }
 
-        /* Interactive Spell / Verification bar */
         .spell-strip {
             background: rgba(12, 15, 26, 0.6); border: 1px solid var(--border-glass);
             border-radius: var(--radius-card); padding: 16px; margin-bottom: 20px;
@@ -170,9 +181,15 @@
         .study-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
         /* --- EXAM MODE --- */
-        .exam-progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: var(--radius-pill); overflow: hidden; margin-bottom: 28px; }
+        .exam-progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: var(--radius-pill); overflow: hidden; margin-bottom: 24px; }
         .exam-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-rose), var(--accent-pink)); width: 0%; transition: width 0.3s; }
-        .exam-stem { font-size: 1.5rem; font-weight: 800; text-align: center; color: #fff; margin-bottom: 28px; }
+        .exam-direction-badge {
+            display: inline-block; font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1.5px; padding: 4px 12px; border-radius: var(--radius-pill);
+            background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.3);
+            margin-bottom: 14px;
+        }
+        .exam-stem { font-size: 1.45rem; font-weight: 800; text-align: center; color: #fff; margin-bottom: 25px; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
         .opt-btn {
             background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-glass);
@@ -193,11 +210,15 @@
         .score-circle.pass { border-color: var(--accent-emerald); color: var(--accent-emerald); background: rgba(16, 185, 129, 0.05); }
         .score-circle.fail { border-color: var(--accent-rose); color: var(--accent-rose); background: rgba(244, 63, 94, 0.05); }
 
-        /* SVG helper */
         .icon { width: 18px; height: 18px; fill: currentColor; }
 
+        @media (max-width: 800px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+        }
         @media (max-width: 680px) {
             .stats-grid { grid-template-columns: 1fr; }
+            .critical-banner { flex-direction: column; align-items: flex-start; }
+            .critical-banner .btn { width: 100%; }
             .options-grid { grid-template-columns: 1fr; }
             .study-actions { grid-template-columns: 1fr; }
             .display-en { font-size: 2.2rem; }
@@ -208,7 +229,6 @@
 </head>
 <body>
 
-<!-- AURORA GLOW BACKGROUND -->
 <div class="aurora-container">
     <div class="aurora-orb orb-1"></div>
     <div class="aurora-orb orb-2"></div>
@@ -216,7 +236,6 @@
 </div>
 
 <div class="app-shell">
-    <!-- NAVIGATION BAR -->
     <header>
         <div class="nav-bar">
             <div class="brand">MASTER<span>VOCAB</span> B1-B2</div>
@@ -226,11 +245,11 @@
             </div>
         </div>
 
-        <!-- LEARNING STATISTICS -->
+        <!-- METRICAS DE APRENDIZAJE -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-label">Total Aprendidas</div>
-                <div class="stat-value" id="stat-total-learned">0 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ 1000</span></div>
+                <div class="stat-value" id="stat-total-learned">0 <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400;">/ 1000</span></div>
                 <div class="stat-sub" id="stat-pct">0% del vocabulario</div>
             </div>
             <div class="stat-card">
@@ -243,28 +262,44 @@
                 <div class="stat-value" id="stat-reviewed" style="color: var(--accent-pink);">0</div>
                 <div class="stat-sub">Reforzadas en repeticion</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-label">Banco Critico</div>
+                <div class="stat-value" id="stat-critical-count" style="color: var(--accent-amber);">0</div>
+                <div class="stat-sub">Palabras con debilidad</div>
+            </div>
+        </div>
+
+        <!-- BANNER DE ACCESO AL BANCO CRITICO -->
+        <div class="critical-banner">
+            <div>
+                <div class="critical-title">Banco de Palabras Criticas (Refuerzo)</div>
+                <div class="critical-desc" id="critical-banner-text">Tienes 0 palabras que requieren refuerzo prioritario.</div>
+            </div>
+            <button class="btn btn-amber" id="critical-start-btn" onclick="startCriticalStudy()">
+                Repasar Palabras Criticas
+            </button>
         </div>
     </header>
 
-    <!-- 1. DASHBOARD DE GRUPOS -->
+    <!-- 1. DASHBOARD -->
     <div id="dashboard" class="view active">
         <div class="groups-grid" id="groups-container"></div>
     </div>
 
-    <!-- 2. WORKSPACE DE ESTUDIO INTERACTIVO -->
+    <!-- 2. ESPACIO DE ESTUDIO INTERACTIVO -->
     <div id="study-view" class="view">
         <div class="glass-workspace">
             <div class="workspace-top">
                 <button class="btn" onclick="showDashboard()">Volver a Modulos</button>
                 <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
-                    Dominadas en esta sesion: <span id="session-counter" style="color: #fff;">0</span> / 100
+                    <span id="study-mode-badge" style="color: var(--accent-cyan); margin-right: 10px;">Modulo</span>
+                    Restantes en sesion: <span id="session-counter" style="color: #fff;">0</span>
                 </div>
             </div>
 
-            <!-- 3D GLASS FLASHCARD -->
+            <!-- FLASHCARD 3D -->
             <div class="card-stage" onclick="toggleFlip()">
                 <div class="card-inner" id="card-inner">
-                    <!-- Frente (Ingles) -->
                     <div class="card-face">
                         <div class="card-indicator">Ingles - Clic para voltear</div>
                         <div class="display-en" id="word-en">Word</div>
@@ -274,7 +309,6 @@
                         </button>
                         <div class="cue-text">Haz clic en la tarjeta para ver la traduccion</div>
                     </div>
-                    <!-- Reverso (Espanol) -->
                     <div class="card-face card-face-back">
                         <div class="card-indicator">Espanol</div>
                         <div class="display-es" id="word-es">Traduccion</div>
@@ -296,10 +330,10 @@
                 </div>
             </div>
 
-            <!-- EVALUACION DE APRENDIZAJE -->
+            <!-- EVALUACION -->
             <div class="study-actions">
                 <button class="btn" style="border-color: rgba(244, 63, 94, 0.4);" onclick="handleActionHard()">
-                    Aun me cuesta (Repasar despues)
+                    Aun me cuesta (Mover a Banco Critico)
                 </button>
                 <button class="btn btn-emerald" onclick="handleActionMastered()">
                     Dominada (Continuar)
@@ -308,7 +342,7 @@
         </div>
     </div>
 
-    <!-- 3. MODO EXAMEN -->
+    <!-- 3. MODO EXAMEN BIDIRECCIONAL -->
     <div id="exam-view" class="view">
         <div class="glass-workspace">
             <div class="workspace-top">
@@ -316,7 +350,10 @@
                 <div id="exam-counter" style="font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">Pregunta 1 de 15</div>
             </div>
             <div class="exam-progress-bar"><div class="exam-progress-fill" id="exam-progress"></div></div>
-            <div class="exam-stem" id="exam-question">Significado de: "..."</div>
+            <div style="text-align: center;">
+                <span class="exam-direction-badge" id="exam-direction">Evaluacion Bidireccional</span>
+            </div>
+            <div class="exam-stem" id="exam-question">Pregunta...</div>
             <div class="options-grid" id="exam-options"></div>
         </div>
     </div>
@@ -1324,11 +1361,25 @@ continue|continuar
     }
 
     // ==========================================
-    // 2. SISTEMA DE ESTADISTICAS PERSISTENTE
+    // 2. SISTEMA DE ESTADISTICAS Y BANCO CRITICO
     // ==========================================
-    // Registra: { [enWord]: { mastered: bool, knownDirectly: bool, reviewed: bool } }
     let wordStats = JSON.parse(localStorage.getItem('vocabWordStats')) || {};
+    let criticalWords = JSON.parse(localStorage.getItem('vocabCriticalWords')) || [];
     let progress = JSON.parse(localStorage.getItem('englishProgress')) || { unlocked: 1 };
+
+    function addCriticalWord(wordObj) {
+        if (!criticalWords.some(w => w.en.toLowerCase() === wordObj.en.toLowerCase())) {
+            criticalWords.push({ en: wordObj.en, es: wordObj.es });
+            localStorage.setItem('vocabCriticalWords', JSON.stringify(criticalWords));
+            updateStatsDisplay();
+        }
+    }
+
+    function removeCriticalWord(enWord) {
+        criticalWords = criticalWords.filter(w => w.en.toLowerCase() !== enWord.toLowerCase());
+        localStorage.setItem('vocabCriticalWords', JSON.stringify(criticalWords));
+        updateStatsDisplay();
+    }
 
     function updateStatsDisplay() {
         let totalLearned = 0;
@@ -1341,19 +1392,33 @@ continue|continuar
             if (s.reviewed) reviewedCount++;
         });
 
-        document.getElementById('stat-total-learned').innerHTML = `${totalLearned} <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ 1000</span>`;
+        document.getElementById('stat-total-learned').innerHTML = `${totalLearned} <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400;">/ 1000</span>`;
         document.getElementById('stat-known-first').innerText = knownFirst;
         document.getElementById('stat-reviewed').innerText = reviewedCount;
+        document.getElementById('stat-critical-count').innerText = criticalWords.length;
         
         const pct = ((totalLearned / 1000) * 100).toFixed(1);
         document.getElementById('stat-pct').innerText = `${pct}% del vocabulario`;
+
+        // Actualizar banner critico
+        const bannerText = document.getElementById('critical-banner-text');
+        const startBtn = document.getElementById('critical-start-btn');
+        if (criticalWords.length === 0) {
+            bannerText.innerText = "No tienes palabras criticas acumuladas. Tu base de vocabulario esta solida.";
+            startBtn.disabled = true;
+        } else {
+            bannerText.innerText = `Tienes ${criticalWords.length} palabra(s) detectada(s) con debilidad. Repasalas para consolidar.`;
+            startBtn.disabled = false;
+        }
     }
 
     function resetStatsConfirmation() {
-        if (confirm("Deseas reiniciar todas tus estadisticas y progreso a cero?")) {
+        if (confirm("Deseas reiniciar todas tus estadisticas, banco critico y progreso a cero?")) {
             localStorage.removeItem('vocabWordStats');
+            localStorage.removeItem('vocabCriticalWords');
             localStorage.removeItem('englishProgress');
             wordStats = {};
+            criticalWords = [];
             progress = { unlocked: 1 };
             updateStatsDisplay();
             renderDashboard();
@@ -1361,11 +1426,11 @@ continue|continuar
     }
 
     // ==========================================
-    // 3. NAVEGACION Y VISTAS
+    // 3. NAVEGACION
     // ==========================================
     let currentGroup = 0;
+    let isCriticalMode = false;
     let studyQueue = [];
-    let sessionMastered = 0;
     let currentWord = null;
 
     const views = {
@@ -1403,14 +1468,14 @@ continue|continuar
                 <div>
                     <div class="group-tag">Modulo ${i + 1}</div>
                     <h3>Grupo ${i + 1}</h3>
-                    <p>${isUnlocked ? '100 palabras seleccionadas' : 'Requiere modulo ' + i}</p>
+                    <p>${isUnlocked ? '100 palabras clave' : 'Requiere modulo ' + i}</p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                     <button class="btn btn-primary" ${!isUnlocked ? 'disabled' : ''} onclick="startStudy(${i})">
                         Estudiar y Repasar
                     </button>
                     <button class="btn" ${!isUnlocked ? 'disabled' : ''} onclick="startExam(${i})">
-                        Examen de Paso
+                        Examen Bidireccional
                     </button>
                 </div>
             `;
@@ -1419,19 +1484,29 @@ continue|continuar
     }
 
     // ==========================================
-    // 4. MODO ESTUDIO INTERACTIVO (FLASHCARD 3D)
+    // 4. MODO ESTUDIO Y REFUERZO CRITICO
     // ==========================================
     function startStudy(groupIdx) {
+        isCriticalMode = false;
         currentGroup = groupIdx;
         studyQueue = [...groups[groupIdx]];
-        sessionMastered = 0;
+        document.getElementById('study-mode-badge').innerText = `Modulo ${groupIdx + 1}`;
+        switchView('study');
+        renderNextCard();
+    }
+
+    function startCriticalStudy() {
+        if (criticalWords.length === 0) return;
+        isCriticalMode = true;
+        studyQueue = [...criticalWords];
+        document.getElementById('study-mode-badge').innerText = "Refuerzo: Banco Critico";
         switchView('study');
         renderNextCard();
     }
 
     function renderNextCard() {
         if (studyQueue.length === 0) {
-            alert("Modulo de repaso finalizado exitosamente.");
+            alert(isCriticalMode ? "Has reforzado todas las palabras criticas pendientes." : "Modulo de repaso finalizado exitosamente.");
             showDashboard();
             return;
         }
@@ -1440,7 +1515,7 @@ continue|continuar
         document.getElementById('card-inner').classList.remove('flipped');
         document.getElementById('word-en').innerText = currentWord.en;
         document.getElementById('word-es').innerText = currentWord.es;
-        document.getElementById('session-counter').innerText = sessionMastered;
+        document.getElementById('session-counter').innerText = studyQueue.length;
 
         const input = document.getElementById('spell-input');
         input.value = '';
@@ -1483,9 +1558,11 @@ continue|continuar
 
     function handleActionHard() {
         const item = studyQueue.shift();
-        studyQueue.push(item); // Pasa al final para reforzarse
+        studyQueue.push(item);
 
-        // Registro de estadistica
+        // Registro de debilidad
+        addCriticalWord(item);
+
         if (!wordStats[item.en]) {
             wordStats[item.en] = { mastered: false, knownDirectly: false, reviewed: true };
         } else {
@@ -1499,9 +1576,12 @@ continue|continuar
 
     function handleActionMastered() {
         const item = studyQueue.shift();
-        sessionMastered++;
 
-        // Si nunca fue marcada como 'reviewed', se cuenta como conocida directo
+        if (isCriticalMode) {
+            // Eliminar del banco critico si se dominó durante el refuerzo
+            removeCriticalWord(item.en);
+        }
+
         if (!wordStats[item.en]) {
             wordStats[item.en] = { mastered: true, knownDirectly: true, reviewed: false };
         } else {
@@ -1514,7 +1594,7 @@ continue|continuar
     }
 
     // ==========================================
-    // 5. MODO EXAMEN (PALABRAS ALEATORIAS DEL GRUPO)
+    // 5. EXAMEN BIDIRECCIONAL (EN -> ES / ES -> EN)
     // ==========================================
     let examItems = [];
     let examCurrent = 0;
@@ -1525,17 +1605,40 @@ continue|continuar
         examCurrent = 0;
         examScore = 0;
 
-        // Extrae 15 palabras aleatorias del grupo actual
         const pool = [...groups[groupIdx]].sort(() => 0.5 - Math.random());
-        examItems = pool.slice(0, 15).map(item => {
-            const distractors = [...groups[groupIdx]]
-                .filter(w => w.es !== item.es)
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 3)
-                .map(w => w.es);
+        examItems = pool.slice(0, 15).map((item, idx) => {
+            // Intercalar 50% de preguntas Ingles->Espanol y 50% Espanol->Ingles
+            const direction = idx % 2 === 0 ? 'EN_TO_ES' : 'ES_TO_EN';
 
-            const options = [item.es, ...distractors].sort(() => 0.5 - Math.random());
-            return { en: item.en, correct: item.es, options };
+            if (direction === 'EN_TO_ES') {
+                const distractors = [...groups[groupIdx]]
+                    .filter(w => w.es !== item.es)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(w => w.es);
+                const options = [item.es, ...distractors].sort(() => 0.5 - Math.random());
+                return {
+                    direction: 'Ingles a Espanol',
+                    questionText: `Que significa la palabra: "${item.en}"?`,
+                    correct: item.es,
+                    options,
+                    wordObj: item
+                };
+            } else {
+                const distractors = [...groups[groupIdx]]
+                    .filter(w => w.en !== item.en)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(w => w.en);
+                const options = [item.en, ...distractors].sort(() => 0.5 - Math.random());
+                return {
+                    direction: 'Espanol a Ingles (Evocacion)',
+                    questionText: `Cual es la traduccion de: "${item.es}"?`,
+                    correct: item.en,
+                    options,
+                    wordObj: item
+                };
+            }
         });
 
         switchView('exam');
@@ -1549,7 +1652,8 @@ continue|continuar
         const pct = (examCurrent / examItems.length) * 100;
         document.getElementById('exam-progress').style.width = `${pct}%`;
 
-        document.getElementById('exam-question').innerText = `Significado de: "${q.en}"`;
+        document.getElementById('exam-direction').innerText = q.direction;
+        document.getElementById('exam-question').innerText = q.questionText;
 
         const container = document.getElementById('exam-options');
         container.innerHTML = '';
@@ -1558,23 +1662,25 @@ continue|continuar
             const btn = document.createElement('button');
             btn.className = 'opt-btn';
             btn.innerText = opt;
-            btn.onclick = () => selectExamAnswer(btn, opt, q.correct);
+            btn.onclick = () => selectExamAnswer(btn, opt, q);
             container.appendChild(btn);
         });
     }
 
-    function selectExamAnswer(btn, chosen, correct) {
+    function selectExamAnswer(btn, chosen, questionData) {
         const all = document.querySelectorAll('.opt-btn');
         all.forEach(b => b.disabled = true);
 
-        if (chosen === correct) {
+        if (chosen === questionData.correct) {
             btn.classList.add('correct');
             examScore++;
         } else {
             btn.classList.add('wrong');
             all.forEach(b => {
-                if (b.innerText === correct) b.classList.add('correct');
+                if (b.innerText === questionData.correct) b.classList.add('correct');
             });
+            // Toda respuesta incorrecta entra automaticamente al Banco Critico
+            addCriticalWord(questionData.wordObj);
         }
 
         setTimeout(() => {
@@ -1610,7 +1716,7 @@ continue|continuar
         } else {
             scoreCircle.className = 'score-circle fail';
             titleEl.innerText = "Examen No Superado";
-            msgEl.innerText = `Aciertos: ${examScore} de ${examItems.length}. Se requiere un 80% para validar el modulo.`;
+            msgEl.innerText = `Aciertos: ${examScore} de ${examItems.length}. Las palabras falladas se han enviado a tu Banco Critico para su refuerzo.`;
         }
     }
 
